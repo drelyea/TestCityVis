@@ -3,41 +3,82 @@
 <!DOCTYPE HTML>
 
 <html>
-<head>
-<title>CSE 5544 Project</title>
-<script type="text/javascript" src="d3.js"></script>
-	<style type="text/css">
-    .links line {
-      stroke: #999;
-      stroke-opacity: 0.6;
-    }
+	<head>
+		<title>CSE 5544 Project</title>
+		<script type="text/javascript" src="d3.js"></script>
+  		<link rel="stylesheet" href="style.css">
 
-    .nodes circle {
-      stroke: #fff;
-      stroke-width: 1.5px;
-    }
-	</style>
+	</head>
 
-</head>
+	<body>
 
-<body>
+	<!-- this is a comment -->
 
-<!-- this is a comment -->
+	<div align = 'center'>
+		<h1 align='center'>
+			CSE 5544
+		</h1>
+		<h3 align='center'>
+			Top 100 Cities
+		</h3>
+		<!--<svg></svg>-->
+	</div>
+	<p id="paragraph"></p>
 
-<div align = 'center'>
-	<h1 align='center'>
-		CSE 5544
-	</h1>
-	<h3 align='center'>
-		Top 100 Cities
-	</h3>
-	<svg></svg>
-</div>
+	<button id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</button>
+	<button id="btnGender" class="button" onclick="myFunction(this)">Gender</button>
+	<button id="btnIncome" class="button" onclick="myFunction(this)">Income</button>
+	<button id="btnEthnicity" class="button" onclick="myFunction(this)">Ethnicity</button>
+	<button id="btnHousehold" class="button" onclick="myFunction(this)"># of people per household</button>
+	<button id="btnEducation" class="button" onclick="myFunction(this)">Education</button>
 
 
 
-<!-- below is how you are going to load your javascript file --> 
+	<!-- below is how you are going to load your javascript file --> 
 
-<script type="text/javascript" src="TestCityVis.js"></script>
+	<!--<script type="text/javascript" src="TestCityVis.js"></script>-->
+	<script type="text/javascript">
+		var boxCount=1;
+		var clicked = [{btn:"btnAge", gray:1},{btn:"btnGender", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
+		var text="btnAge: 1<br>btnGender: 0<br>btnIncome: 0<br>btnEthnicity: 0<br>btnHousehold: 0<br>btnEducation: 0";
+		document.getElementById("paragraph").innerHTML = text;
 
-</body> </html>
+
+		function myFunction(id) {
+			//console.log(window.getComputedStyle(id).getPropertyValue('background-color') + clicked[0]["gray"]);
+			text="";
+
+			//its gray and make it white
+			if(window.getComputedStyle(id).getPropertyValue('background-color')!="rgb(255, 255, 255)" && boxCount>1){
+				console.log("make white");
+			    id.style.background="#ffffff";
+			    boxCount--;
+				clicked[clicked.map(function(e) { return e.btn; }).indexOf(id.id)]["gray"]=0;
+
+			}
+			//its white, make it gray
+			else if (window.getComputedStyle(id).getPropertyValue('background-color')=="rgb(255, 255, 255)" && boxCount>=1){
+				boxCount++
+				console.log("make gray");
+				id.style.background="#C8C8C8";
+				clicked[clicked.map(function(e) { return e.btn; }).indexOf(id.id)]["gray"]=1;
+				//clicked.push(id.id);
+
+			}
+			console.log(boxCount);
+			console.log(clicked[0]["gray"]);
+
+			for (i = 0; i < clicked.length; i++) { 
+    			text += clicked[i]["btn"] + ": " + clicked[i]["gray"] + "<br>";
+			}
+			document.getElementById("paragraph").innerHTML = text;
+
+
+		}
+
+
+	</script>
+
+
+	</body>
+</html>
