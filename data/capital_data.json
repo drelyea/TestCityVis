@@ -1,0 +1,454 @@
+{
+    "capitals": [
+        {
+            "age": 31.2,
+            "grads_total": 12731,
+            "households": 40283.0,
+            "income": 40949.0,
+            "name": "Albany",
+            "people_per_household": 2.44,
+            "pop": 98468
+        },
+        {
+            "age": 37.2,
+            "grads_total": 126,
+            "households": 15779.0,
+            "income": 72214.0,
+            "name": "Annapolis",
+            "people_per_household": 2.46,
+            "pop": 38841
+        },
+        {
+            "age": 33.4,
+            "grads_total": 19391,
+            "households": 185820.0,
+            "income": 47527.0,
+            "name": "Atlanta",
+            "people_per_household": 2.42,
+            "pop": 448901
+        },
+        {
+            "age": 33.3,
+            "grads_total": 4686,
+            "households": 70187.0,
+            "income": 37337.0,
+            "name": "Augusta",
+            "people_per_household": 2.8,
+            "pop": 196635
+        },
+        {
+            "age": 32.1,
+            "grads_total": 23147,
+            "households": 351195.0,
+            "income": 57689.0,
+            "name": "Austin",
+            "people_per_household": 2.53,
+            "pop": 887061
+        },
+        {
+            "age": 31.1,
+            "grads_total": 5884,
+            "households": 88476.0,
+            "income": 39876.0,
+            "name": "Baton Rouge",
+            "people_per_household": 2.59,
+            "pop": 229186
+        },
+        {
+            "age": 37.0,
+            "grads_total": 1178,
+            "households": 29716.0,
+            "income": 58901.0,
+            "name": "Bismarck",
+            "people_per_household": 2.25,
+            "pop": 66980
+        },
+        {
+            "age": 35.9,
+            "grads_total": 5131,
+            "households": 86916.0,
+            "income": 50323.0,
+            "name": "Boise",
+            "people_per_household": 2.46,
+            "pop": 214196
+        },
+        {
+            "age": 31.6,
+            "grads_total": 39955,
+            "households": 256294.0,
+            "income": 55777.0,
+            "name": "Boston",
+            "people_per_household": 2.54,
+            "pop": 650281
+        },
+        {
+            "age": 42.6,
+            "grads_total": 896,
+            "households": 21594.0,
+            "income": 47668.0,
+            "name": "Carson City",
+            "people_per_household": 2.52,
+            "pop": 54482
+        },
+        {
+            "age": 41.5,
+            "grads_total": 772,
+            "households": 22766.0,
+            "income": 48442.0,
+            "name": "Charleston",
+            "people_per_household": 2.22,
+            "pop": 50566
+        },
+        {
+            "age": 35.2,
+            "grads_total": 40,
+            "households": 25130.0,
+            "income": 58219.0,
+            "name": "Cheyenne",
+            "people_per_household": 2.47,
+            "pop": 62195
+        },
+        {
+            "age": 28.1,
+            "grads_total": 10912,
+            "households": 44506.0,
+            "income": 41260.0,
+            "name": "Columbia",
+            "people_per_household": 2.96,
+            "pop": 131958
+        },
+        {
+            "age": 32.0,
+            "grads_total": 26631,
+            "households": 334724.0,
+            "income": 45659.0,
+            "name": "Columbus",
+            "people_per_household": 2.46,
+            "pop": 824663
+        },
+        {
+            "age": 40.1,
+            "grads_total": 1495,
+            "households": 16987.0,
+            "income": 56093.0,
+            "name": "Concord",
+            "people_per_household": 2.5,
+            "pop": 42537
+        },
+        {
+            "age": 34.1,
+            "grads_total": 21589,
+            "households": 275795.0,
+            "income": 53637.0,
+            "name": "Denver",
+            "people_per_household": 2.36,
+            "pop": 649654
+        },
+        {
+            "age": 33.4,
+            "grads_total": 3456,
+            "households": 81717.0,
+            "income": 46290.0,
+            "name": "Des Moines",
+            "people_per_household": 2.55,
+            "pop": 208020
+        },
+        {
+            "age": 30.0,
+            "grads_total": 2964,
+            "households": 12945.0,
+            "income": 45363.0,
+            "name": "Dover",
+            "people_per_household": 2.87,
+            "pop": 37144
+        },
+        {
+            "age": 37.6,
+            "grads_total": 387,
+            "households": 12105.0,
+            "income": 41401.0,
+            "name": "Frankfort",
+            "people_per_household": 2.27,
+            "pop": 27535
+        },
+        {
+            "age": 32.4,
+            "grads_total": 2300,
+            "households": 20516.0,
+            "income": 33289.0,
+            "name": "Harrisburg",
+            "people_per_household": 2.4,
+            "pop": 49232
+        },
+        {
+            "age": 30.3,
+            "grads_total": 3361,
+            "households": 45239.0,
+            "income": 30630.0,
+            "name": "Hartford",
+            "people_per_household": 2.76,
+            "pop": 124795
+        },
+        {
+            "age": 40.7,
+            "grads_total": 555,
+            "households": 13095.0,
+            "income": 49852.0,
+            "name": "Helena",
+            "people_per_household": 2.26,
+            "pop": 29600
+        },
+        {
+            "age": 40.4,
+            "grads_total": 10467,
+            "households": 127177.0,
+            "income": 61442.0,
+            "name": "Honolulu",
+            "people_per_household": 2.74,
+            "pop": 347973
+        },
+        {
+            "age": 34.0,
+            "grads_total": 37043,
+            "households": 330243.0,
+            "income": 41987.0,
+            "name": "Indianapolis",
+            "people_per_household": 2.55,
+            "pop": 841449
+        },
+        {
+            "age": 31.7,
+            "grads_total": 3164,
+            "households": 62671.0,
+            "income": 32250.0,
+            "name": "Jackson",
+            "people_per_household": 2.76,
+            "pop": 173212
+        },
+        {
+            "age": 37.9,
+            "grads_total": 536,
+            "households": 16884.0,
+            "income": 47969.0,
+            "name": "Jefferson City",
+            "people_per_household": 2.56,
+            "pop": 43186
+        },
+        {
+            "age": 37.0,
+            "grads_total": 591,
+            "households": 12114.0,
+            "income": 85746.0,
+            "name": "Juneau",
+            "people_per_household": 2.69,
+            "pop": 32531
+        },
+        {
+            "age": 32.1,
+            "grads_total": 4825,
+            "households": 48414.0,
+            "income": 35563.0,
+            "name": "Lansing",
+            "people_per_household": 2.36,
+            "pop": 114485
+        },
+        {
+            "age": 32.2,
+            "grads_total": 9025,
+            "households": 107574.0,
+            "income": 49840.0,
+            "name": "Lincoln",
+            "people_per_household": 2.51,
+            "pop": 269726
+        },
+        {
+            "age": 36.0,
+            "grads_total": 5028,
+            "households": 79902.0,
+            "income": 46085.0,
+            "name": "Little Rock",
+            "people_per_household": 2.46,
+            "pop": 196943
+        },
+        {
+            "age": 30.9,
+            "grads_total": 19817,
+            "households": 104087.0,
+            "income": 54896.0,
+            "name": "Madison",
+            "people_per_household": 2.34,
+            "pop": 243122
+        },
+        {
+            "age": 34.4,
+            "grads_total": 3859,
+            "households": 79866.0,
+            "income": 42927.0,
+            "name": "Montgomery",
+            "people_per_household": 2.54,
+            "pop": 202967
+        },
+        {
+            "age": 43.0,
+            "grads_total": 309,
+            "households": 3510.0,
+            "income": 61588.0,
+            "name": "Montpelier",
+            "people_per_household": 2.2,
+            "pop": 7712
+        },
+        {
+            "age": 34.0,
+            "grads_total": 16601,
+            "households": 254729.0,
+            "income": 47621.0,
+            "name": "Nashville",
+            "people_per_household": 2.49,
+            "pop": 634512
+        },
+        {
+            "age": 33.7,
+            "grads_total": 8977,
+            "households": 232254.0,
+            "income": 47779.0,
+            "name": "Oklahoma City",
+            "people_per_household": 2.63,
+            "pop": 610672
+        },
+        {
+            "age": 37.3,
+            "grads_total": 1583,
+            "households": 20870.0,
+            "income": 53617.0,
+            "name": "Olympia",
+            "people_per_household": 2.35,
+            "pop": 48941
+        },
+        {
+            "age": 33.2,
+            "grads_total": 37249,
+            "households": 525610.0,
+            "income": 47326.0,
+            "name": "Phoenix",
+            "people_per_household": 2.88,
+            "pop": 1514208
+        },
+        {
+            "age": 39.4,
+            "households": 5874.0,
+            "income": 53201.0,
+            "name": "Pierre",
+            "people_per_household": 2.37,
+            "pop": 13938,
+            "total_grads": 222
+        },
+        {
+            "age": 29.3,
+            "grads_total": 8363,
+            "households": 61481.0,
+            "income": 37501.0,
+            "name": "Providence",
+            "people_per_household": 2.91,
+            "pop": 178680
+        },
+        {
+            "age": 32.5,
+            "grads_total": 10911,
+            "households": 170366.0,
+            "income": 55398.0,
+            "name": "Raleigh",
+            "people_per_household": 2.54,
+            "pop": 432520
+        },
+        {
+            "age": 32.9,
+            "grads_total": 9407,
+            "households": 87224.0,
+            "income": 40758.0,
+            "name": "Richmond",
+            "people_per_household": 2.45,
+            "pop": 213735
+        },
+        {
+            "age": 34.0,
+            "grads_total": 12374,
+            "households": 178185.0,
+            "income": 50739.0,
+            "name": "Sacramento",
+            "people_per_household": 2.7,
+            "pop": 480566
+        },
+        {
+            "age": 39.7,
+            "grads_total": 2852,
+            "households": 93364.0,
+            "income": 51360.0,
+            "name": "Saint Paul",
+            "people_per_household": 2.51,
+            "pop": 234167
+        },
+        {
+            "age": 34.8,
+            "grads_total": 1166,
+            "households": 57729.0,
+            "income": 47191.0,
+            "name": "Salem",
+            "people_per_household": 2.77,
+            "pop": 160008
+        },
+        {
+            "age": 31.5,
+            "grads_total": 10309,
+            "households": 75330.0,
+            "income": 47243.0,
+            "name": "Salt Lake City",
+            "people_per_household": 2.53,
+            "pop": 190679
+        },
+        {
+            "age": 42.5,
+            "grads_total": 298,
+            "households": 35592.0,
+            "income": 50737.0,
+            "name": "Santa Fe",
+            "people_per_household": 2.33,
+            "pop": 83008
+        },
+        {
+            "age": 38.7,
+            "grads_total": 4288,
+            "households": 50575.0,
+            "income": 49868.0,
+            "name": "Springfield",
+            "people_per_household": 2.31,
+            "pop": 117061
+        },
+        {
+            "age": 26.2,
+            "grads_total": 19204,
+            "households": 74388.0,
+            "income": 39681.0,
+            "name": "Tallahassee",
+            "people_per_household": 2.51,
+            "pop": 187024
+        },
+        {
+            "age": 39.7,
+            "grads_total": 2852,
+            "households": 93364.0,
+            "income": 51360.0,
+            "name": "Topeka",
+            "people_per_household": 2.51,
+            "pop": 234167
+        },
+        {
+            "age": 33.8,
+            "grads_total": 3352,
+            "households": 27844.0,
+            "income": 34257.0,
+            "name": "Trenton",
+            "people_per_household": 3.04,
+            "pop": 84632
+        }
+    ]
+}
