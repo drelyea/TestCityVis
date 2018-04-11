@@ -55,24 +55,57 @@ def get_data():
 
     acs_yg_fields = ['age', 'income', 'pop']
     acs_yg_tenure_fields = ['households']
+    acs_yg_nativity_fields = ['nativity_foreign', 'nativity_foreign_under5', 'nativity_foreign_5to17',
+                              'nativity_foreign_18to24', 'nativity_foreign_25to34', 'nativity_foreign_35to44',
+                              'nativity_foreign_45to54', 'nativity_foreign_55to59', 'nativity_foreign_60to61',
+                              'nativity_foreign_62to64', 'nativity_foreign_65to74', 'nativity_foreign_75over',
+                              'nativity_us', 'nativity_us_under5', 'nativity_us_5to17', 'nativity_us_18to24',
+                              'nativity_us_25to34', 'nativity_us_35to44', 'nativity_us_45to54', 'nativity_us_55to59',
+                              'nativity_us_60to61', 'nativity_us_62to64', 'nativity_us_65to74', 'nativity_us_75over']
+    acs_yg_poverty_fields = ['income_below_poverty']
+    acs_yg_race_fields = ['pop_native', 'pop_black', 'pop_white', 'pop_asian', 'pop_hawaiian', 'pop_other',
+                          'pop_2ormore', 'pop_latino']
+    acs_yg_num_emp_fields = ['num_emp']
+    acs_yg_income_distribution_fields = ['income_under10', 'income_10to15', 'income_15to20', 'income_20to25',
+                                         'income_25to30', 'income_30to35', 'income_35to40', 'income_40to45',
+                                         'income_45to50', 'income_50to60', 'income_60to75', 'income_75to100',
+                                         'income_100to125', 'income_125to150', 'income_150to200', 'income_200over']
+
     ipeds_grads_fields = ['grads_total']
+
+    chr_fields = ['high_school_graduation', 'some_college', 'unemployment']
 
     # for each city
     for city in cities:
 
         city_json = {}
 
-        # get acs_yg
-        acs_yg_json = get_table_data(acs_yg_fields, construct_city_query(construct_additions(acs_yg_fields), city[1]))
-        city_json.update(acs_yg_json)
+        # get acs_yg_fields
+        city_json.update(get_table_data(acs_yg_fields, construct_city_query(construct_additions(acs_yg_fields), city[1])))
 
         # get acs_yg_tenure_fields
-        acs_yg_tenure_json = get_table_data(acs_yg_tenure_fields, construct_city_query(construct_additions(acs_yg_tenure_fields), city[1]))
-        city_json.update(acs_yg_tenure_json)
+        city_json.update(get_table_data(acs_yg_tenure_fields, construct_city_query(construct_additions(acs_yg_tenure_fields), city[1])))
+
+        # get acs_yg_nativity_fields
+        city_json.update(get_table_data(acs_yg_nativity_fields, construct_city_query(construct_additions(acs_yg_nativity_fields), city[1])))
+
+        # get acs_yg_poverty_fields
+        city_json.update(get_table_data(acs_yg_poverty_fields, construct_city_query(construct_additions(acs_yg_poverty_fields), city[1])))
+
+        # get acs_yg_race_fields
+        city_json.update(get_table_data(acs_yg_race_fields, construct_city_query(construct_additions(acs_yg_race_fields), city[1])))
+
+        # get acs_yg_num_emp_fields
+        city_json.update(get_table_data(acs_yg_num_emp_fields, construct_city_query(construct_additions(acs_yg_num_emp_fields), city[1])))
+
+        # get acs_yg_income_distribution_fields
+        city_json.update(get_table_data(acs_yg_income_distribution_fields, construct_city_query(construct_additions(acs_yg_income_distribution_fields), city[1])))
 
         # get acs_yg_tenure_fields
-        ipeds_grads_json = get_table_data(ipeds_grads_fields, construct_city_query(construct_additions(ipeds_grads_fields), city[1]))
-        city_json.update(ipeds_grads_json)
+        city_json.update(get_table_data(ipeds_grads_fields, construct_city_query(construct_additions(ipeds_grads_fields), city[1])))
+
+        # get chr_fields
+        city_json.update(get_table_data(chr_fields, construct_city_query(construct_additions(chr_fields), city[1])))
 
         city_json['name'] = city[0]
         master_json['capitals'].append(city_json)
@@ -82,7 +115,7 @@ def get_data():
 
         # fix Pierre grad error
         if city['name'] == 'Pierre':
-            city['total_grads'] = 222
+            city['grads_total'] = 222
 
         # calculate people per household
         city['people_per_household'] = round(city['pop']/city['households'], 2)
