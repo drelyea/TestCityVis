@@ -10,9 +10,8 @@
 
 
 .button {
-    background-color: rgb(255, 255, 255);
-    border-color: black;
-    color: black;
+    background-color: #848398;
+    color: #f6f6f7;
     padding: 15px 20px;
     text-align: center;
     text-decoration: none;
@@ -20,6 +19,26 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    /*width: 20%;*/
-    border-radius: 32px;
+    width:75px;
+    height:50px;
+}
+
+@font-face {
+    font-family:"DINMedium";
+    src: url("fonts/DINMedium.ttf")
+}
+
+.title {
+    font-family: "DINMedium";
+    font-size: 40px;
+}
+
+.text {
+    font-family: "DINMedium";
+    font-size: 20px;
+}
+
+body {
+    background-color: #02012c;
+    color: white;
 }

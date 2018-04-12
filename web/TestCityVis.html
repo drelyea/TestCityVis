@@ -7,45 +7,81 @@
 		<title>CSE 5544 Project</title>
 		<script type="text/javascript" src="d3.js"></script>
   		<link rel="stylesheet" href="style.css">
-
 	</head>
 
 	<body>
-
-	<!-- this is a comment -->
-
-	<div align = 'center'>
-		<h1 align='center'>
-			CSE 5544
-		</h1>
-		<h3 align='center'>
-			Top 100 Cities
-		</h3>
-		<svg></svg>
-	</div>
-	<p id="paragraph"></p>
-
-	<button id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</button>
+	<!--<button id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</button>
 	<button id="btnGender" class="button" onclick="myFunction(this)">Gender</button>
 	<button id="btnIncome" class="button" onclick="myFunction(this)">Income</button>
 	<button id="btnEthnicity" class="button" onclick="myFunction(this)">Ethnicity</button>
 	<button id="btnHousehold" class="button" onclick="myFunction(this)"># of people per household</button>
-	<button id="btnEducation" class="button" onclick="myFunction(this)">Education</button>
-
-
-
-	<!-- below is how you are going to load your javascript file --> 
+	<button id="btnEducation" class="button" onclick="myFunction(this)">Education</button>-->
 
 	<script type="text/javascript" src="TestCityVis.js"></script>
 	<script type="text/javascript">
-		var boxCount=1;
+	var height = 1500;
+	var width = 1200;
+	var groupWidth = 400;
+	var textPadding = 50;
+	var buttonPaddingx = 100;
+	var buttonPaddingy = 120;
+
+	// adding SVG
+	var svg = d3.select("body").append("svg")
+    	.attr("width", width)
+    	.attr("height", height)
+    	.attr("class", "svg");
+
+    // add 1st group to correspond to the left panels
+    var gLeft = svg.append('g')
+        .attr("transform", "translate(0,0)");
+	gLeft.append("text")
+		.attr("class", "title")
+        .attr("transform", "translate(0,"+textPadding+")")
+        .text("Test City, USA")
+        .attr("color", "white");
+    gLeft.append("text")
+    	.attr("class", "text")
+        .attr("transform", "translate(0,"+ 2*textPadding+")")
+        .text("Choose one or multiple layers to compare.")
+        .attr("color", "white");
+
+    // add 2nd group to correspond to the right panels
+    var gRight = svg.append('g')
+        .attr("transform", "translate("+groupWidth+",0)");
+	gRight.append("text")
+		.attr("class", "text")
+        .attr("transform", "translate(300,"+2*textPadding+")")
+        .text("Average Age In Columbus as Compared to USA")
+        .attr("color", "white");
+
+    // add buttons
+    buttons = ["Age", "Gender", "Income", "Ethnicity", "Household", "Education"];
+
+	var buttonsGroup = gLeft.append("g")
+
+	var buttons = buttonsGroup.selectAll("rect")
+	.data(buttons)
+  	.enter()
+  	.append("rect")
+  	.attr("type","button")
+  	.attr("class", "button")
+    .attr("transform", function(d,i) {
+          return "translate(" + buttonPaddingx*(i) + "," + buttonPaddingy +")";
+        })
+  	.text(function(d,i) {
+  		return buttons[i];
+  	})
+	.attr("width", 75)
+	.attr("height", 25)
+
+	/*	var boxCount=1;
 		var clicked = [{btn:"btnAge", gray:1},{btn:"btnGender", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
 		var text="btnAge: 1<br>btnGender: 0<br>btnIncome: 0<br>btnEthnicity: 0<br>btnHousehold: 0<br>btnEducation: 0";
 		document.getElementById("paragraph").innerHTML = text;
 
 
 		function myFunction(id) {
-			//console.log(window.getComputedStyle(id).getPropertyValue('background-color') + clicked[0]["gray"]);
 			text="";
 
 			//its gray and make it white
@@ -72,13 +108,8 @@
     			text += clicked[i]["btn"] + ": " + clicked[i]["gray"] + "<br>";
 			}
 			document.getElementById("paragraph").innerHTML = text;
-
-
-		}
-
+		}*/
 
 	</script>
-
-
 	</body>
 </html>
