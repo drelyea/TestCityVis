@@ -3,9 +3,36 @@ var height = 600;
 var svg = d3.select("svg");
 svg.attr("width", width).attr("height", height);
 
+  var margin = {top: 20, right: 20, bottom: 20, left: 40},
+      width = 960 - margin.left - margin.right,
+      height = 600 - margin.top - margin.bottom;
+      svgWidth=950;
+      svgHeight=800;
+
+  // setup x 
+  var xScale = d3.scaleLinear().range([0, width]), 
+      xAxis = d3.axisBottom(xScale);
+
+  // setup y
+  var yScale = d3.scaleLinear().range([height, 0]), 
+      yAxis = d3.axisLeft(yScale);
+
+
+    xScale.domain([0,100]);
+    yScale.domain([0, 100]);
+
+  var group = svg.append('g');//.attr('transform', "translate(" + (width+margin.left+margin.right) + "," + 500 + ")");
+
+
+      // x-axis
+    group.append("g")
+        .attr("transform", "translate(0," + yScale(0) + ")")
+        .call(xAxis);
+
+
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-d3.json("top100.json", function(error, graph) {
+/*d3.json("top100.json", function(error, graph) {
   if (error) throw error;
 
   var lines = svg.append("g")
@@ -55,3 +82,5 @@ d3.json("top100.json", function(error, graph) {
         .attr("y2", function(d) { return d.target.y; });
   }
 });
+
+*/
