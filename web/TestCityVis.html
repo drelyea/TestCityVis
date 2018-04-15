@@ -30,7 +30,8 @@
 	var svg = d3.select("body").append("svg")
     	.attr("width", width)
     	.attr("height", height)
-    	.attr("class", "svg");
+    	.attr("class", "svg")
+    	.style("fill", "white");
 
     // add 1st group to correspond to the left panels
     var gLeft = svg.append('g')
@@ -38,13 +39,11 @@
 	gLeft.append("text")
 		.attr("class", "title")
         .attr("transform", "translate(0,"+textPadding+")")
-        .text("Test City, USA")
-        .attr("color", "white");
+        .text("Test City, USA");
     gLeft.append("text")
     	.attr("class", "text")
         .attr("transform", "translate(0,"+ 2*textPadding+")")
-        .text("Choose one or multiple layers to compare.")
-        .attr("color", "white");
+        .text("Choose one or multiple layers to compare.");
 
     // add 2nd group to correspond to the right panels
     var gRight = svg.append('g')
@@ -53,27 +52,59 @@
 		.attr("class", "text")
         .attr("transform", "translate(300,"+2*textPadding+")")
         .text("Average Age In Columbus as Compared to USA")
-        .attr("color", "white");
+        .attr("id", "text");
 
     // add buttons
     buttons = ["Age", "Gender", "Income", "Ethnicity", "Household", "Education"];
+    buttonCoorX = [10, 110, 210, 10, 110, 210];
+    buttonCoorY = [120, 120, 120, 160, 160, 160];
 
 	var buttonsGroup = gLeft.append("g")
 
-	var buttons = buttonsGroup.selectAll("rect")
-	.data(buttons)
-  	.enter()
-  	.append("rect")
-  	.attr("type","button")
-  	.attr("class", "button")
-    .attr("transform", function(d,i) {
-          return "translate(" + buttonPaddingx*(i) + "," + buttonPaddingy +")";
-        })
-  	.text(function(d,i) {
-  		return buttons[i];
-  	})
-	.attr("width", 75)
-	.attr("height", 25)
+	for(var j = 0; j < buttons.length; j++) {
+		makeButtons(buttons[j], j, buttonCoorX[j], buttonCoorY[j]);
+		makeLabels(j,buttonCoorX[j], buttonCoorY[j]);
+	}
+
+	// make buttons
+	function makeButtons(label, i, x, y) {
+		var curr = buttonsGroup.append("rect")
+	  	.attr("type","button")
+	  	.attr("class", "button")
+	    .attr("transform", function(d,i) {
+	          return "translate(" + x + "," + y +")";
+	        })
+		.attr("width", 75)
+		.attr("height", 25)
+		.attr("rx", 12)
+		.attr("ry", 12)
+	    .style("fill", "#848398")
+	    .style("color", "#f6f6f7")
+	    .on("mouseover", function(d,i) {
+			curr.transition()
+			.style("opacity", 0.7)
+		})
+		.on("mouseout", function(d,i) {
+			curr.transition()
+			.style("opacity", 1.0)
+		})
+	}
+
+	// make buttons
+	function makeLabels(i, x, y) {
+		var curr = buttonsGroup.append("text")
+	    .attr("transform", function(d,i) {
+	          return "translate(" + (x+24) + "," + (y+18) +")";
+	        })
+		.attr("width", 75)
+		.attr("height", 25)
+	    .style("fill", "#ffffff")
+	    .text(function(d,i) {
+	    	return buttons[i]
+	    })
+	    .attr("class", "buttonText")
+	}
+	
 
 	/*	var boxCount=1;
 		var clicked = [{btn:"btnAge", gray:1},{btn:"btnGender", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
