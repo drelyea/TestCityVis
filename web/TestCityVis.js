@@ -36,10 +36,10 @@ var axis=group.append("g")
 var rollover=group.append('text').style("text-anchor", "left").style("font-size", "25px").style("width",100).attr('transform', "translate(" + 50 + "," + 100 + ")");
 
 
-d3.json("../data/capital_data.json", drawPoints);
+d3.json("../data/capital_and_nation_data.json", drawPoints);
 function drawPoints(error, points){
   var capitals = points["capitals"];
-
+  var nation = points["nation"];
 
   console.log(points);
 
@@ -87,9 +87,10 @@ function readJson(category,max,min){
 
 
 
-  d3.json("../data/capital_data.json", drawPoints);
+  d3.json("../data/capital_and_nation_data.json", drawPoints);
   function drawPoints(error, points){
     var capitals = points["capitals"];
+    var nation = points["nation"];
 
 
     console.log(points);
