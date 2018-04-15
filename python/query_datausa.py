@@ -3,23 +3,29 @@ import json
 
 # hardcoded list of cities of interest with geo-codes
 # some are 'Census Designated Places' while others are 'Metropolitan Areas'
-cities = [('Albany', '16000US3601000'), ('Annapolis', '16000US2401600'), ('Atlanta', '16000US1304000'),
-          ('Augusta', '16000US1304204'), ('Austin', '16000US4805000'), ('Baton Rouge', '16000US2205000'),
-          ('Bismarck', '16000US3807200'), ('Boise', '16000US1608830'), ('Boston', '16000US2507000'),
-          ('Carson City', '16000US3209700'), ('Charleston', '16000US5414600'), ('Cheyenne', '16000US5613900'),
-          ('Columbia', '16000US4516000'), ('Columbus', '16000US3918000'), ('Concord', '16000US3314200'),
-          ('Denver', '16000US0820000'), ('Des Moines', '16000US1921000'), ('Dover', '16000US1021200'),
-          ('Frankfort', '16000US2128900'), ('Harrisburg', '16000US4232800'), ('Hartford', '16000US0937000'),
-          ('Helena', '16000US3035600'), ('Honolulu', '16000US1571550'), ('Indianapolis', '16000US1836003'),
-          ('Jackson', '16000US2836000'), ('Jefferson City', '16000US2937000'), ('Juneau', '16000US0236400'),
-          ('Lansing', '16000US2646000'), ('Lincoln', '16000US3128000'), ('Little Rock', '16000US0541000'),
-          ('Madison', '16000US5548000'), ('Montgomery', '16000US0151000'), ('Montpelier', '16000US5046000'),
-          ('Nashville', '16000US4752006'), ('Oklahoma City', '16000US4055000'), ('Olympia', '16000US5351300'),
-          ('Phoenix', '16000US0455000'), ('Pierre', '16000US4649600'), ('Providence', '16000US4459000'),
-          ('Raleigh', '16000US3755000'), ('Richmond', '16000US5167000'), ('Sacramento', '16000US0664000'),
-          ('Saint Paul', '31000US45820'), ('Salem', '16000US4164900'), ('Salt Lake City', '16000US4967000'),
-          ('Santa Fe', '16000US3570500'), ('Springfield', '16000US1772000'), ('Tallahassee', '16000US1270600'),
-          ('Topeka', '31000US45820'), ('Trenton', '16000US3474000')]
+cities = [('Albany', '16000US3601000', 'NY'), ('Annapolis', '16000US2401600', 'MD'),
+          ('Atlanta', '16000US1304000', 'GA'), ('Augusta', '16000US1304204', 'ME'), ('Austin', '16000US4805000', 'TX'),
+          ('Baton Rouge', '16000US2205000', 'LA'), ('Bismarck', '16000US3807200', 'ND'),
+          ('Boise', '16000US1608830', 'ID'), ('Boston', '16000US2507000', 'MA'),
+          ('Carson City', '16000US3209700', 'NV'), ('Charleston', '16000US5414600', 'WV'),
+          ('Cheyenne', '16000US5613900', 'WY'), ('Columbia', '16000US4516000', 'SC'),
+          ('Columbus', '16000US3918000', 'OH'), ('Concord', '16000US3314200', 'NH'), ('Denver', '16000US0820000', 'CO'),
+          ('Des Moines', '16000US1921000', 'IA'), ('Dover', '16000US1021200', 'DE'),
+          ('Frankfort', '16000US2128900', 'KY'), ('Harrisburg', '16000US4232800', 'PA'),
+          ('Hartford', '16000US0937000', 'CT'), ('Helena', '16000US3035600', 'MT'),
+          ('Honolulu', '16000US1571550', 'HI'), ('Indianapolis', '16000US1836003', 'IN'),
+          ('Jackson', '16000US2836000', 'MS'), ('Jefferson City', '16000US2937000', 'MO'),
+          ('Juneau', '16000US0236400', 'AK'), ('Lansing', '16000US2646000', 'MI'), ('Lincoln', '16000US3128000', 'NE'),
+          ('Little Rock', '16000US0541000', 'AR'), ('Madison', '16000US5548000', 'WI'),
+          ('Montgomery', '16000US0151000', 'AL'), ('Montpelier', '16000US5046000', 'VT'),
+          ('Nashville', '16000US4752006', 'TN'), ('Oklahoma City', '16000US4055000', 'OK'),
+          ('Olympia', '16000US5351300', 'WA'), ('Phoenix', '16000US0455000', 'AZ'), ('Pierre', '16000US4649600', 'SD'),
+          ('Providence', '16000US4459000', 'RI'), ('Raleigh', '16000US3755000', 'NC'),
+          ('Richmond', '16000US5167000', 'VA'), ('Sacramento', '16000US0664000', 'CA'),
+          ('Saint Paul', '31000US45820', 'MN'), ('Salem', '16000US4164900', 'OR'),
+          ('Salt Lake City', '16000US4967000', 'UT'), ('Santa Fe', '16000US3570500', 'NM'),
+          ('Springfield', '16000US1772000', 'IL'), ('Tallahassee', '16000US1270600', 'FL'),
+          ('Topeka', '31000US45820', 'KS'), ('Trenton', '16000US3474000', 'NJ')]
 
 # requested fields per table
 acs_yg_fields = ['age', 'income', 'pop']
@@ -40,6 +46,17 @@ acs_yg_income_distribution_fields = ['income_under10', 'income_10to15', 'income_
                                      'income_45to50', 'income_50to60', 'income_60to75', 'income_75to100',
                                      'income_100to125', 'income_125to150', 'income_150to200', 'income_200over']
 ipeds_grads_fields = ['grads_total']
+
+# region lists
+pacific = ['AK', 'HI', 'WA', 'OR', 'CA']
+mountain = ['NV', 'ID', 'MT', 'WY', 'UT', 'CO', 'AZ', 'NM']
+west_north_central = ['ND', 'SD', 'NE', 'KS', 'MO', 'IA', 'MN']
+west_south_central = ['OK', 'TX', 'AR', 'LA']
+east_north_central = ['WI', 'IL', 'IN', 'MI', 'OH']
+east_south_central = ['KY', 'TN', 'AL', 'MS']
+south_atlantic = ['FL', 'GA', 'SC', 'NC', 'VA', 'WV', 'MD', 'DE']
+middle_atlantic = ['PA', 'NJ', 'NY']
+new_england = ['CT', 'RI', 'MA', 'VT', 'NH', 'ME']
 
 
 def construct_city_query(additions, geo_code):
@@ -110,6 +127,7 @@ def query_cities(master_json):
             get_table_data(ipeds_grads_fields, construct_city_query(construct_additions(ipeds_grads_fields), city[1])))
 
         city_json['name'] = city[0]
+        city_json['state'] = city[2]
         master_json['capitals'].append(city_json)
 
         print('Queried {}'.format(city[0]))
@@ -153,6 +171,27 @@ def post_process(master_json):
 
         # calculate people per household
         city['people_per_household'] = round(city['pop'] / city['households'], 2)
+
+        # add region
+        state_abbreviation = city['state']
+        if state_abbreviation in pacific:
+            city['region'] = 'Pacific'
+        if state_abbreviation in mountain:
+            city['region'] = 'Mountain'
+        if state_abbreviation in west_north_central:
+            city['region'] = 'West North Central'
+        if state_abbreviation in west_south_central:
+            city['region'] = 'West South Central'
+        if state_abbreviation in east_north_central:
+            city['region'] = 'East North Central'
+        if state_abbreviation in east_south_central:
+            city['region'] = 'East South Central'
+        if state_abbreviation in south_atlantic:
+            city['region'] = 'South Atlantic'
+        if state_abbreviation in middle_atlantic:
+            city['region'] = 'Middle Atlantic'
+        if state_abbreviation in new_england:
+            city['region'] = 'New England'
 
     master_json['nation']['people_per_household'] = round(
         master_json['nation']['pop'] / master_json['nation']['households'], 2)
