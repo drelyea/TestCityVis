@@ -4,7 +4,7 @@
 
 <html>
 	<head>
-		<title>CSE 5544 Project</title>
+		<title>USA Test Cities</title>
 		<script type="text/javascript" src="d3.js"></script>
 		<script src="d3.min.js"></script>
 
@@ -14,18 +14,13 @@
 
 	<body>
 
-	<!-- this is a comment -->
-
 	<div align = 'center'>
 		<h1 align='center'>
-			CSE 5544
+			USA Test Cities
 		</h1>
-		<h3 align='center'>
-			Top 100 Cities
-		</h3>
 		<svg></svg>
 	</div>
-	<!---<p id="paragraph"></p> -->
+
 	<div class="buttonDiv" align = "center">
 		<button id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</button>
 		<button id="btnCitizenship" class="button" onclick="myFunction(this)">Citizenship</button>
@@ -35,58 +30,29 @@
 		<button id="btnEducation" class="button" onclick="myFunction(this)">Education</button>
 	</div>
 
-
-	<!-- below is how you are going to load your javascript file -->
-
 	<script type="text/javascript" src="TestCityVis.js"></script>
 	<script type="text/javascript">
 		var boxCount=1;
 		var clicked = [{btn:"btnAge", gray:1},{btn:"btnCitizenship", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
-		var text="btnAge: 1<br>btnCitizenship: 0<br>btnIncome: 0<br>btnEthnicity: 0<br>btnHousehold: 0<br>btnEducation: 0";
-		//document.getElementById("paragraph").innerHTML = text;
-		//readJson("Age", 44,28);
-
-		var maxMins = [{btn:"btnAge", max:44, min:28},{btn:"btnCitizenship", max:0, min:0},{btn:"btnIncome", max:30000, min:87000},{btn:"btnEthnicity", max:0, min:0},{btn:"btnHousehold", max:0, min:0},{btn:"btnEducation", max:0, min:0}];
 
 		function myFunction(button) {
-			//console.log(window.getComputedStyle(button).getPropertyValue('background-color') + clicked[0]["gray"]);
-			text="";
 
-			//its gray and make it white
-			if(window.getComputedStyle(button).getPropertyValue('background-color')!="rgb(255, 255, 255)" && boxCount>1){
-				//console.log("make white");
-			    button.style.background="#ffffff";
+			if(window.getComputedStyle(button).getPropertyValue('background-color')!="rgb(132, 131, 152)" && boxCount>1){
+			    button.style.background="#848398";
 			    boxCount--;
 				clicked[clicked.map(function(e) { return e.btn; }).indexOf(button.id)]["gray"]=0;
 
 			}
-			//its white, make it gray
-			else if (window.getComputedStyle(button).getPropertyValue('background-color')=="rgb(255, 255, 255)" && boxCount>=1){
+
+			else if (window.getComputedStyle(button).getPropertyValue('background-color')=="rgb(132, 131, 152)" && boxCount>=1){
 				boxCount++
-				//console.log("make gray");
 				button.style.background="#C8C8C8";
 				clicked[clicked.map(function(e) { return e.btn; }).indexOf(button.id)]["gray"]=1;
-				//clicked.push(button.id);
 
 			}
-			//console.log(boxCount);
-			//console.log(clicked[0]["gray"]);
 
-			for (i = 0; i < clicked.length; i++) {
-    			text += clicked[i]["btn"] + ": " + clicked[i]["gray"] + "<br>";
-			}
-			//document.getElementById("paragraph").innerHTML = text;
 			renderData(clicked, boxCount);
-			/*if(button.id=="btnAge" || button.id=="btnIncome"){
-				//console.log(button.id.substring(3));
-				//console.log(maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["max"]);
-				//console.log(maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["min"]);
-				readJson(button.id.substring(3),maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["max"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["min"]);
-			}*/
-
 		}
-
-
 	</script>
 
 

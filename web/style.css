@@ -1,3 +1,8 @@
+body {
+    background-color: #02012c;
+    color: #ffffff;
+}
+
 .links line {
     stroke: #999;
     stroke-opacity: 0.6;
@@ -8,10 +13,16 @@
     stroke-width: 1.5px;
 }
 
+.tooltip {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+}
 
 .button {
-    background-color: rgb(255, 255, 255);
-    border-color: black;
+    background-color: #848398;
+    color: #f6f6f7;
     color: black;
     padding: 15px 20px;
     text-align: center;
@@ -20,6 +31,17 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    /*width: 20%;*/
     border-radius: 32px;
+}
+
+.axis text{
+    fill: white;
+}
+
+.axis path{
+    stroke: white;
+}
+
+.axis line{
+    stroke: white;
 }
