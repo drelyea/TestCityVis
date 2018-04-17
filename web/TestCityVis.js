@@ -1,206 +1,339 @@
-//var svg = d3.select("svg");
+var buttonIDs=["btnAge", "btnCitizenship", "btnIncome", "btnEthnicity", "btnHousehold", "btnEducation"];
+var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "Household", "Education"];
 
-  var margin = {top: 20, right: 20, bottom: 20, left: 40},
-      width = 960,
-      height = 600 - margin.top - margin.bottom;
-      /*svgWidth=960,
-      svgHeight=600;*/
+var svg = d3.select("svg");
 
+    
 
-//svg.attr("width", svgWidth).attr("height", svgHeight);
+var margin = {top: 20, right: 20, bottom: 20, left: 40},
+  width = 960 - margin.left - margin.right,
+  height = 500 - margin.top - margin.bottom,
+  svgWidth=960,
+  svgHeight=500;
 
-// setup x 
-var xScale = d3.scaleLinear().range([0, width]), 
+yCords = [];
+for(i = 0; i < 51; i++){
+    yCords[i] = Math.random() * 100;
+}
+
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+svg.attr("width", svgWidth).attr("height", svgHeight);
+applyGradient(svg);
+
+d3.select(".buttonDiv").append("rect")
+    .attr("class", "button")
+    .attr("id", "btnAge")
+    .text("Age")
+    .style("background-color", "#C8C8C8")
+    .on("click", function(d,i){
+        myFunction(this);
+    });
+
+for(i=1; i<6; i++){
+    d3.select(".buttonDiv").append("rect")
+        .attr("class", "button")
+        .attr("id", buttonIDs[i])
+        .text(buttonText[i])
+        .on("click", function(d,i){
+            myFunction(this);
+        });
+}
+
+// setup x
+var xScale = d3.scaleLinear().range([-10, width+10]),
     xAxis = d3.axisBottom(xScale);
 
 // setup y
-var yScale = d3.scaleLinear().range([height, 0]), 
+var yScale = d3.scaleLinear().range([height, 50]),
     yAxis = d3.axisLeft(yScale);
-
-
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-
-xScale.domain([26,44]);
+xScale.domain([28,44]);
 yScale.domain([0, 100]);
 
-var group = gRight.append('g').attr('transform', "translate(" + 0 + "," + 100 + ")");
-
+var group = svg.append("g");
 
   // x-axis
 var axis=group.append("g")
-  .attr("transform", "translate(0," + yScale(0) + ")")
-  .call(xAxis)
-  .style("stroke", "white")
-  .style("fill", "white");
+  .attr("transform", "translate(10," + yScale(0) + ")")
+  .attr("class","axis")
+  .call(xAxis);
 
-var rollover=group.append('text')
-    .style("text-anchor", "left")
-    .style("font-size", "25px")
-    .style("width",100)
-    .attr('transform', "translate(" + 50 + "," + 100 + ")")
-    .attr("class", "text");
+//var rollover=group.append("text").style("text-anchor", "left").style("font-size", "25px").style("width",100).attr("transform", "translate(" + 50 + "," + 100 + ")");
 
+renderInitial();
 
-d3.json("../data/capital_and_nation_data.json", drawPoints);
-function drawPoints(error, points){
-  var capitals = points["capitals"];
-  var nation = points["nation"];
-
-  console.log(points);
-
-  group.selectAll('circle')
-    .data(capitals).enter()
-    .append('circle')
-    .attr('cx', function(d,i) {
-      //console.log("age" + d.age);
-      //console.log("i" + i);
-     
-      return xScale(d.age);
-         
-    })
-    .attr('cy', function(d,i) {
-      return yScale(Math.random() * 100);
-    })
-
-    .attr('r', function(d,i) {
-      //console.log(d.pop);
-      //console.log("i" + i);
-
-      if(d.pop>=1000000){
-        return 20;
-      }
-      else if(d.pop>=500000 && d.pop<=999999){
-          return 14;
-      }
-      else{
-        return 7;
-      }
-
-    })
-
-
-      .attr('fill', function(d,i) {
-        //console.log("age" + d.age);
-        //console.log("i" + i);
-
-
-        switch(d.region) {
-          case "Middle Atlantic":
-              return colors[0];
-              break;
-          case "South Atlantic":
-              return colors[1];
-              break;
-          case "New England":
-              return colors[2];
-              break;
-          case "West South Central":
-              return colors[3];
-              break;                                
-          case "West North Central":
-              return colors[4];
-              break;
-          case "Mountain":
-              return colors[5];
-              break;
-          case "East North Central":
-              return colors[6];
-              break;
-          case "East South Central":
-              return colors[7];
-              break;
-           case "Pacific":
-              return colors[8];
-              break;                                         
-          default:
-              return xScale(d.age);
-        }
-      })
-
-
-    .on('mouseover', function(d) {      
-      rollover.text("Rolled Over: " + d.name);
-      if(d.pop>=1000000){
-        d3.select(this).attr('stroke-width', 3);
-      }
-      else if(d.pop>=500000 && d.pop<=999999){
-        d3.select(this).attr('stroke-width', 2);
-      }
-      else{
-        d3.select(this).attr('stroke-width', 1);
-      }
-
-      d3.select(this).attr('stroke', 'white');
-
-    })
-    .on('mouseleave', function(d) {      
-      rollover.text("");
-      d3.select(this).attr('stroke', 'none');
-
-    });
+function renderInitial(){
+    d3.json("../data/data.json", render);
+    function render(error, points){
+        drawInitialScatter(points);
+    }
 }
 
-
-function readJson(category,min,max){
-  xScale.domain([min,max]);
-  yScale.domain([0, 100]);
-
-    // x-axis
-  axis.call(xAxis);
-
-
-
-  d3.json("../data/capital_and_nation_data.json", drawPoints);
-  function drawPoints(error, points){
-    var capitals = points["capitals"];
-    var nation = points["nation"];
-
-
-    console.log(points);
-
-    group.selectAll('circle')
-      .transition()
-
-      .attr('cx', function(d,i) {
-        //console.log("age" + d.age);
-        //console.log("i" + i);
-
-
-        switch(category) {
-          case "Age":
-              console.log(category);
-              return xScale(d.age);
-              break;
-          case "Gender":
-              console.log(category);
-              return xScale(d.income);
-              break;
-          case "Income":
-              console.log(category);
-              return xScale(d.income);
-              break;
-          case "Ethnicity":
-              console.log(category);
-              return xScale(100*(d.pop_white/d.pop));
-              break;                                
-          case "Household":
-              console.log(category);
-              return xScale(d.people_per_household);
-              break;
-          case "Education":
-              console.log(d.name);
-              return xScale(100*(d.grads_total/(d.pop-d.nativity_foreign_under5-d.nativity_foreign_5to17-d.nativity_us_under5-d.nativity_us_5to17)));
-              break;
-          default:
-              return xScale(d.age);
+function renderData(clicked, boxCount){
+    console.log(clicked);
+    d3.json("../data/data.json", render);
+    function render(error, points){
+        if(boxCount > 1){
+            genMultiData(points, clicked);
+        } else{
+            genSingleData(points, clicked);
         }
-      })
-      .attr('cy', function(d,i) {
-        return yScale(Math.random() * 100);
-      })
+    }
+}
 
-      ;
-  }
+function genMultiData(points, clicked){
+    var rawData = new Array();
+    buttonMap = ["age", "foreign", "income", "pop_white", "numHouse", "grads"];
+    numClicked = 0;
+    for(i = 0; i < clicked.length; i++){
+        if(clicked[i]["gray"] == 1){
+            rawData[numClicked] = new Array();
+            for(j = 0; j < points.length; j++){
+                rawData[numClicked].push(points[j][buttonMap[i]]);
+            }
+            numClicked++;
+        }
+    }
+
+    for(i = 0; i < rawData.length; i++){
+        xScale = d3.scaleLinear()
+            .domain(d3.extent(rawData[i]))
+            .range([-1, 1]);
+        for(j = 0; j < rawData[i].length; j++){
+            rawData[i][j] = xScale(rawData[i][j]);
+        }
+    }
+    finalData = [];
+    for(i = 0; i < rawData[0].length; i++){
+        val = 0;
+        for(j = 0; j < rawData.length; j++){
+            val += rawData[j][i];
+        }
+        finalData[i] = val/rawData.length;
+    }
+    for(i = 0; i < points.length; i++){
+        points[i]["data"] = finalData[i];
+    }
+
+    xScale = d3.scaleLinear()
+        .domain([-1,1])
+        .range([20, width-20]);
+
+    drawScatter(points,xScale);
+
+    svg.selectAll(".axisLabel")
+        .text("Similarity Score");
+
+}
+
+function genSingleData(points, clicked){
+    buttonMap = ["age", "foreign", "income", "pop_white", "numHouse", "grads"];
+    unitMap = ["Years", "Percentage Foreign", "Dollars", "Percentage White", "Number of People", "Percent Graduated"];
+    units = "";
+    cat = "";
+    for(i = 0; i < clicked.length; i++){
+        if(clicked[i]["gray"] == 1){
+            cat = buttonMap[i];
+            units = unitMap[i];
+        }
+    }
+    finalData = [];
+    for(i = 0; i < points.length; i++){
+        finalData[i] = points[i][cat];
+    }
+    for(i = 0; i < points.length; i++){
+        points[i]["data"] = finalData[i];
+    }
+    xScale = d3.scaleLinear()
+        .domain(d3.extent(finalData))
+        .range([20, width-20]);
+
+    drawScatter(points,xScale);
+
+    svg.selectAll(".axisLabel")
+        .text(units);
+
+}
+
+function drawScatter(points, xScale){
+    //var xScale1 = d3.scaleLinear().range([10, width-10]),
+    var xScale1 = xScale.range([10, width-10]);
+    xAxis = d3.axisBottom(xScale1);
+
+    var color = [d3.rgb(0,139,139), d3.rgb(255,255,0), d3.rgb(255,69,0), d3.rgb(131,139,131), d3.rgb(255,0,0), d3.rgb(255,104,180)];
+
+    axis.call(xAxis);
+    svg.selectAll("circle")
+        .data(points)
+        .transition()
+        .attr("cx", function(d){
+            return xScale(d.data);
+        })
+        .attr("cy", function(d,i) {
+            return yScale(yCords[i]);
+        })
+        .attr("r", function(d,i) {
+            return Math.log(d.pop/1000);//Math.log(d.pop);
+        })
+        /*.attr("fill", function(d, i){
+            return color[i%color.length];
+        })
+        ;
+    svg.selectAll("circle")
+        .on("mouseover", function(d) {
+            tooltip.style("opacity", .9);
+            tooltip.html(d.name + "<br/>" + d.data)
+                .style("left", (d3.event.pageX + 15) + "px")
+                .style("top", (d3.event.pageY - 20) + "px");
+        })
+        .on("mouseout", function(d) {
+            tooltip.transition()
+                .style("opacity", 0);
+        })*/;
+    drawLines(points,xScale);
+}
+
+function drawInitialScatter(points){
+    finalData = [];
+    for(i = 0; i < points.length; i++){
+        finalData[i] = points[i]["age"];
+    }
+    for(i = 0; i < points.length; i++){
+        points[i]["data"] = finalData[i];
+    }
+    xScale = d3.scaleLinear()
+        .domain(d3.extent(finalData))
+        .range([20, width-20]);
+    //var xScale1 = d3.scaleLinear().range([10, width-10]),
+    var xScale1 = xScale.range([10, width-10]);
+    xAxis = d3.axisBottom(xScale1);
+
+    var color = [d3.rgb(0,139,139), d3.rgb(255,255,0), d3.rgb(255,69,0), d3.rgb(131,139,131), d3.rgb(255,0,0), d3.rgb(255,104,180)];
+
+    drawInitialLines(points,xScale);
+
+    axis.call(xAxis);
+    svg.selectAll("circle")
+        .data(points)
+        .enter()
+        .append("circle")
+        .transition()
+        .attr("cx", function(d){
+            return xScale(d.data);
+        })
+        .attr("cy", function(d,i) {
+            return yScale(yCords[i]);
+        })
+        .attr("r", function(d,i) {
+            return Math.log(d.pop/1000);//Math.log(d.pop);
+        })
+        .attr("fill", function(d, i){
+            return color[i%color.length];
+        })
+    svg.selectAll("circle")
+        .on("mouseover", function(d) {
+            tooltip.style("opacity", .9);
+            tooltip.html(d.name + "<br/>" + d.data)
+                .style("left", (d3.event.pageX + 15) + "px")
+                .style("top", (d3.event.pageY - 20) + "px");
+                d3.select(this).attr("stroke", "white");
+
+        })
+        .on("mouseout", function(d) {
+            tooltip.transition()
+                .style("opacity", 0);
+            d3.select(this).attr("stroke", "none");
+
+        });
+
+        svg.append("text")
+            .text("Years")
+            .attr("class", "axisLabel")
+            .attr("x", width/2)
+            .attr("y", height + 30)
+            .attr("text-anchor", "middle")
+            .attr("fill","white");
+
+}
+
+function drawInitialLines(points,xScale){
+    for(i = 0; i < points.length; i++){
+        if(points[i]["name"] == "USA" || points[i]["name"] == "Columbus" ){
+            curClass = points[i]["name"] + "Line";
+            svg.append("line")
+                .attr("class", curClass)
+                .attr("x1", xScale(points[i]["data"]))
+                .attr("y1", 30)
+                .attr("x2", xScale(points[i]["data"]))
+                .attr("y2", height)
+                .attr("stroke", "white");
+
+            curText = points[i]["name"] + "Text";
+            svg.append("text")
+                .text(points[i]["name"])
+                .attr("class", curText)
+                .attr("x", xScale(points[i]["data"]))
+                .attr("y", 25)
+                .attr("text-anchor", "middle")
+                .attr("fill","white");
+        }
+    }
+}
+
+function drawLines(points,xScale){
+    for(i = 0; i < points.length; i++){
+        if(points[i]["name"] == "USA" || points[i]["name"] == "Columbus" ){
+            curClass = points[i]["name"] + "Line";
+            svg.selectAll("." + curClass)
+                .transition()
+                .attr("x1", xScale(points[i]["data"]))
+                .attr("y1", 30)
+                .attr("x2", xScale(points[i]["data"]))
+                .attr("y2", height)
+                .attr("stroke", "white");
+
+            curText = points[i]["name"] + "Text";
+            svg.selectAll("." + curText)
+                .transition()
+                .attr("x", xScale(points[i]["data"]));
+        }
+    }
+}
+
+function applyGradient(svg){
+    var defs = svg.append("defs");
+
+    var gradient = defs.append("linearGradient")
+       .attr("id", "gradient")
+       .attr("x1", "0%")
+       .attr("x2", "100%");
+
+    gradient.append("stop")
+       .attr("class", "start")
+       .attr("offset", "0%")
+       .attr("stop-color", "#02012c")
+       .attr("stop-opactiy", 1);
+
+    gradient.append("stop")
+      .attr("class", "end")
+      .attr("offset", "100%")
+      .attr("stop-color", "#848398")
+      .attr("stop-opactiy", 1);
+
+    svg.append("rect")
+        .attr("width", width-20)
+        .attr("height", height)
+        .attr("transform", "translate(20,0)")
+        .attr("fill", "url(#gradient)");
+
+    svg.append("rect")
+        .attr("width", width-20)
+        .attr("height", 30)
+        .attr("transform", "translate(20,0)")
+        .attr("fill", "#02012c");
 }
