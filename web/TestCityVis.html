@@ -18,8 +18,8 @@
 	<button id="btnEthnicity" class="button" onclick="myFunction(this)">Ethnicity</button>
 	<button id="btnHousehold" class="button" onclick="myFunction(this)"># of people per household</button>
 	<button id="btnEducation" class="button" onclick="myFunction(this)">Education</button>-->
+	<script type="text/javascript" src="d3.button.js"></script>
 
-	<script type="text/javascript" src="TestCityVis.js"></script>
 	<script type="text/javascript">
 	var height = 1500;
 	var width = 1200;
@@ -27,6 +27,7 @@
 	var textPadding = 50;
 	var buttonPaddingx = 100;
 	var buttonPaddingy = 120;
+	var buttonsCount=0;
 
 	// adding SVG
 	var svg = d3.select("body").append("svg")
@@ -56,57 +57,46 @@
         .text("Average Age In Columbus as Compared to USA")
         .attr("id", "text");
 
-    // add buttons
-    buttons = ["Age", "Gender", "Income", "Ethnicity", "Household", "Education"];
-    buttonCoorX = [10, 110, 210, 10, 110, 210];
-    buttonCoorY = [120, 120, 120, 160, 160, 160];
+var colors=["#1de5d6", "#eb6018", "#d1d42a", "#afafaf", "#e98bff", "#7fff00", "#48d1cc"]
+//Middle Atlantic,South Atlantic,New England,West South Central,West North Central,Mountain,East North Central,East South Central,Pacific
 
 	var buttonsGroup = gLeft.append("g")
 
-	for(var j = 0; j < buttons.length; j++) {
-		makeButtons(buttons[j], j, buttonCoorX[j], buttonCoorY[j]);
-		makeLabels(j,buttonCoorX[j], buttonCoorY[j]);
-	}
+var maxMins = [{btn:"Age", max:44, min:26},{btn:"Gender", max:0, min:0},{btn:"Income", max:87000, min:30000},{btn:"Ethnicity", max:100, min:0},{btn:"Household", max:3.1, min:2.0},{btn:"Education", max:20, min:0}];
 
-	// make buttons
-	function makeButtons(label, i, x, y) {
-		var curr = buttonsGroup.append("rect")
-	  	.attr("type","button")
-	  	.attr("class", "button")
-	    .attr("transform", function(d,i) {
-	          return "translate(" + x + "," + y +")";
-	        })
-		.attr("width", 75)
-		.attr("height", 25)
-		.attr("rx", 12)
-		.attr("ry", 12)
-	    .style("fill", "#848398")
-	    .style("color", "#f6f6f7")
-	    .on("mouseover", function(d,i) {
-			curr.transition()
-			.style("opacity", 0.7)
-		})
-		.on("mouseout", function(d,i) {
-			curr.transition()
-			.style("opacity", 1.0)
-		})
-	}
+var data = [{label: "Age",     x: 110, y: 150 },
+            //{label: "Gender", x: 300, y: 150 },
+            {label: "Income",     x: 110, y: 250 },
+            {label: "Ethnicity",     x: 110, y: 350 },
+            {label: "Household",     x: 110, y: 450 },
+            {label: "Education",     x: 110, y: 550 }];
 
-	// make buttons
-	function makeLabels(i, x, y) {
-		var curr = buttonsGroup.append("text")
-	    .attr("transform", function(d,i) {
-	          return "translate(" + (x+24) + "," + (y+18) +")";
-	        })
-		.attr("width", 75)
-		.attr("height", 25)
-	    .style("fill", "#ffffff")
-	    .text(function(d,i) {
-	    	return buttons[i]
-	    })
-	    .attr("class", "buttonText")
-	}
-	
+
+var button = d3.button()
+    .on('press', function(d, i) {
+
+
+    	//console.log("Pressed", d["label"], i, this.parentNode)
+
+		readJson(d["label"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(d["label"])]["min"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(d["label"])]["max"]);
+
+
+
+    })
+    .on('release', function(d, i) {
+    	console.log("Released", d, i, this.parentNode)
+    });
+
+// Add buttons
+var buttons = buttonsGroup.selectAll('.button')
+    .data(data)
+  	.enter()
+    .append('g')
+    .attr('class', 'button')
+    .call(button);
+
+
+
 
 	/*var boxCount=1;
 	var clicked = [{btn:"btnAge", gray:1},{btn:"btnGender", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
@@ -114,7 +104,7 @@
 	document.getElementById("paragraph").innerHTML = text;
 	//readJson("Age", 44,28);
 
-	var maxMins = [{btn:"btnAge", max:44, min:28},{btn:"btnGender", max:0, min:0},{btn:"btnIncome", max:30000, min:87000},{btn:"btnEthnicity", max:0, min:0},{btn:"btnHousehold", max:0, min:0},{btn:"btnEducation", max:0, min:0}];
+	var maxMins = [{btn:"btnAge", max:44, min:26},{btn:"btnGender", max:0, min:0},{btn:"btnIncome", max:87000, min:30000},{btn:"btnEthnicity", max:0, min:0},{btn:"btnHousehold", max:0, min:0},{btn:"btnEducation", max:0, min:0}];
 
 	function myFunction(button) {
 			//console.log(window.getComputedStyle(button).getPropertyValue('background-color') + clicked[0]["gray"]);
@@ -144,9 +134,11 @@
 				console.log(button.id.substring(3));
 				console.log(maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["max"]);
 				console.log(maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["min"]);
-				readJson(button.id.substring(3),maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["max"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["min"]);
+				readJson(button.id.substring(3),maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["min"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["max"]);
 			}
 		}*/
 	</script>
+	<script type="text/javascript" src="TestCityVis.js"></script>
+
 	</body>
 </html>
