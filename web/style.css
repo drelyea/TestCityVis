@@ -1,3 +1,8 @@
+body {
+    background-color: #02012c;
+    color: #ffffff;
+}
+
 .links line {
     stroke: #999;
     stroke-opacity: 0.6;
@@ -10,9 +15,8 @@
 
 
 .button {
-    background-color: rgb(255, 255, 255);
-    border-color: black;
-    color: black;
+    background-color: #848398;
+    color: #f6f6f7;
     padding: 15px 20px;
     text-align: center;
     text-decoration: none;
@@ -20,6 +24,64 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    /*width: 20%;*/
-    border-radius: 32px;
+    width:75px;
+    height:50px;
+}
+
+@font-face {
+    font-family:"DINMedium";
+    src: url("fonts/DINMedium.ttf")
+}
+
+.title {
+    font-family: "DINMedium";
+    font-size: 40px;
+}
+
+.text {
+    font-family: "DINMedium";
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.buttonText {
+  font-size: 13px;
+  font-family: "DINMedium";
+}
+
+.button rect {
+  stroke: #999faa; /* navy 40% */
+  stroke-width: 2px;
+}
+
+.button rect.pressed {
+  fill: #000f2b; /* navy 100% */
+}
+
+.button #gradient-start {
+  stop-color: #999faa; /* navy 40% */
+  stop-opacity: 1;
+}
+
+.button #gradient-stop {
+  stop-color: #4d576b; /* navy 70% */
+  stop-opacity: 1;
+}
+
+.button #gradient-start.active, .button #gradient-start.pressed {
+  stop-color: #4d576b; /* navy 70% */
+}
+
+.button #gradient-stop.active, .button #gradient-stop.pressed {
+  stop-color: #000f2b; /* navy 100% */
+}
+
+.button text {
+  font-size: 30px;
+  fill: #eee;
+  pointer-events: none;
+  text-anchor: middle;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }

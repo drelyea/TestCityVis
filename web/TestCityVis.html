@@ -9,56 +9,112 @@
 		<script src="d3.min.js"></script>
 
   		<link rel="stylesheet" href="style.css">
-
 	</head>
 
 	<body>
-
-	<!-- this is a comment -->
-
-	<div align = 'center'>
-		<h1 align='center'>
-			CSE 5544
-		</h1>
-		<h3 align='center'>
-			Top 100 Cities
-		</h3>
-		<svg></svg>
-	</div>
-	<p id="paragraph"></p>
-
-	<button id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</button>
+	<!--<button id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</button>
 	<button id="btnGender" class="button" onclick="myFunction(this)">Gender</button>
 	<button id="btnIncome" class="button" onclick="myFunction(this)">Income</button>
 	<button id="btnEthnicity" class="button" onclick="myFunction(this)">Ethnicity</button>
 	<button id="btnHousehold" class="button" onclick="myFunction(this)"># of people per household</button>
-	<button id="btnEducation" class="button" onclick="myFunction(this)">Education</button>
+	<button id="btnEducation" class="button" onclick="myFunction(this)">Education</button>-->
+	<script type="text/javascript" src="d3.button.js"></script>
 
-
-
-	<!-- below is how you are going to load your javascript file --> 
-
-	<script type="text/javascript" src="TestCityVis.js"></script>
 	<script type="text/javascript">
-		var boxCount=1;
-		var clicked = [{btn:"btnAge", gray:1},{btn:"btnGender", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
-		var text="btnAge: 1<br>btnGender: 0<br>btnIncome: 0<br>btnEthnicity: 0<br>btnHousehold: 0<br>btnEducation: 0";
-		document.getElementById("paragraph").innerHTML = text;
-		//readJson("Age", 44,28);
+	var height = 1500;
+	var width = 1200;
+	var groupWidth = 400;
+	var textPadding = 50;
+	var buttonPaddingx = 100;
+	var buttonPaddingy = 120;
+	var buttonsCount=0;
 
-		var maxMins = [{btn:"btnAge", max:44, min:28},{btn:"btnGender", max:0, min:0},{btn:"btnIncome", max:30000, min:87000},{btn:"btnEthnicity", max:0, min:0},{btn:"btnHousehold", max:0, min:0},{btn:"btnEducation", max:0, min:0}];
+	// adding SVG
+	var svg = d3.select("body").append("svg")
+    	.attr("width", width)
+    	.attr("height", height)
+    	.attr("class", "svg")
+    	.style("fill", "white");
 
-		function myFunction(button) {
+    // add 1st group to correspond to the left panels
+    var gLeft = svg.append('g')
+        .attr("transform", "translate(0,0)");
+	gLeft.append("text")
+		.attr("class", "title")
+        .attr("transform", "translate(0,"+textPadding+")")
+        .text("Test City, USA");
+    gLeft.append("text")
+    	.attr("class", "text")
+        .attr("transform", "translate(0,"+ 2*textPadding+")")
+        .text("Choose one or multiple layers to compare.");
+
+    // add 2nd group to correspond to the right panels
+    var gRight = svg.append('g')
+        .attr("transform", "translate("+groupWidth+",0)");
+	gRight.append("text")
+		.attr("class", "text")
+        .attr("transform", "translate(300,"+2*textPadding+")")
+        .text("Average Age In Columbus as Compared to USA")
+        .attr("id", "text");
+
+var colors=["#1de5d6", "#eb6018", "#d1d42a", "#afafaf", "#e98bff", "#7fff00", "#48d1cc"]
+//Middle Atlantic,South Atlantic,New England,West South Central,West North Central,Mountain,East North Central,East South Central,Pacific
+
+	var buttonsGroup = gLeft.append("g")
+
+var maxMins = [{btn:"Age", max:44, min:26},{btn:"Gender", max:0, min:0},{btn:"Income", max:87000, min:30000},{btn:"Ethnicity", max:100, min:0},{btn:"Household", max:3.1, min:2.0},{btn:"Education", max:20, min:0}];
+
+var data = [{label: "Age",     x: 110, y: 150 },
+            //{label: "Gender", x: 300, y: 150 },
+            {label: "Income",     x: 110, y: 250 },
+            {label: "Ethnicity",     x: 110, y: 350 },
+            {label: "Household",     x: 110, y: 450 },
+            {label: "Education",     x: 110, y: 550 }];
+
+
+var button = d3.button()
+    .on('press', function(d, i) {
+
+
+    	//console.log("Pressed", d["label"], i, this.parentNode)
+
+		readJson(d["label"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(d["label"])]["min"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(d["label"])]["max"]);
+
+
+
+    })
+    .on('release', function(d, i) {
+    	console.log("Released", d, i, this.parentNode)
+    });
+
+// Add buttons
+var buttons = buttonsGroup.selectAll('.button')
+    .data(data)
+  	.enter()
+    .append('g')
+    .attr('class', 'button')
+    .call(button);
+
+
+
+
+	/*var boxCount=1;
+	var clicked = [{btn:"btnAge", gray:1},{btn:"btnGender", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
+	var text="btnAge: 1<br>btnGender: 0<br>btnIncome: 0<br>btnEthnicity: 0<br>btnHousehold: 0<br>btnEducation: 0";
+	document.getElementById("paragraph").innerHTML = text;
+	//readJson("Age", 44,28);
+
+	var maxMins = [{btn:"btnAge", max:44, min:26},{btn:"btnGender", max:0, min:0},{btn:"btnIncome", max:87000, min:30000},{btn:"btnEthnicity", max:0, min:0},{btn:"btnHousehold", max:0, min:0},{btn:"btnEducation", max:0, min:0}];
+
+	function myFunction(button) {
 			//console.log(window.getComputedStyle(button).getPropertyValue('background-color') + clicked[0]["gray"]);
 			text="";
-
 			//its gray and make it white
 			if(window.getComputedStyle(button).getPropertyValue('background-color')!="rgb(255, 255, 255)" && boxCount>1){
 				//console.log("make white");
 			    button.style.background="#ffffff";
 			    boxCount--;
 				clicked[clicked.map(function(e) { return e.btn; }).indexOf(button.id)]["gray"]=0;
-
 			}
 			//its white, make it gray
 			else if (window.getComputedStyle(button).getPropertyValue('background-color')=="rgb(255, 255, 255)" && boxCount>=1){
@@ -67,29 +123,22 @@
 				button.style.background="#C8C8C8";
 				clicked[clicked.map(function(e) { return e.btn; }).indexOf(button.id)]["gray"]=1;
 				//clicked.push(button.id);
-
 			}
 			console.log(boxCount);
 			//console.log(clicked[0]["gray"]);
-
 			for (i = 0; i < clicked.length; i++) { 
     			text += clicked[i]["btn"] + ": " + clicked[i]["gray"] + "<br>";
 			}
 			document.getElementById("paragraph").innerHTML = text;
-
 			if(button.id=="btnAge" || button.id=="btnIncome"){
 				console.log(button.id.substring(3));
 				console.log(maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["max"]);
 				console.log(maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["min"]);
-
-				readJson(button.id.substring(3),maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["max"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["min"]);
+				readJson(button.id.substring(3),maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["min"],maxMins[maxMins.map(function(e) { return e.btn; }).indexOf(button.id)]["max"]);
 			}
-
-		}
-
-
+		}*/
 	</script>
-
+	<script type="text/javascript" src="TestCityVis.js"></script>
 
 	</body>
 </html>
