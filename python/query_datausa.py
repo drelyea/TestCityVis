@@ -48,15 +48,11 @@ acs_yg_income_distribution_fields = ['income_under10', 'income_10to15', 'income_
 ipeds_grads_fields = ['grads_total']
 
 # region lists
-pacific = ['AK', 'HI', 'WA', 'OR', 'CA']
-mountain = ['NV', 'ID', 'MT', 'WY', 'UT', 'CO', 'AZ', 'NM']
-west_north_central = ['ND', 'SD', 'NE', 'KS', 'MO', 'IA', 'MN']
-west_south_central = ['OK', 'TX', 'AR', 'LA']
-east_north_central = ['WI', 'IL', 'IN', 'MI', 'OH']
-east_south_central = ['KY', 'TN', 'AL', 'MS']
-south_atlantic = ['FL', 'GA', 'SC', 'NC', 'VA', 'WV', 'MD', 'DE']
-middle_atlantic = ['PA', 'NJ', 'NY']
-new_england = ['CT', 'RI', 'MA', 'VT', 'NH', 'ME']
+pacific = ['AK', 'HI']
+west = ['WA', 'OR', 'CA', 'NV', 'ID', 'MT', 'WY', 'UT', 'CO', 'AZ', 'NM']
+midwest = ['ND', 'SD', 'NE', 'KS', 'MN', 'IA', 'MO', 'WI', 'IL', 'IN', 'MI', 'OH']
+south = ['TX', 'OK', 'AR', 'LA', 'MS', 'KY', 'TN', 'AL', 'FL', 'GA', 'SC', 'NC', 'VA', 'WV', 'MD', 'DE']
+northeast = ['PA', 'NJ', 'NY', 'CT', 'RI', 'MA', 'VT', 'NH', 'ME']
 
 
 def construct_city_query(additions, geo_code):
@@ -176,22 +172,14 @@ def post_process(master_json):
         state_abbreviation = city['state']
         if state_abbreviation in pacific:
             city['region'] = 'Pacific'
-        if state_abbreviation in mountain:
-            city['region'] = 'Mountain'
-        if state_abbreviation in west_north_central:
-            city['region'] = 'West North Central'
-        if state_abbreviation in west_south_central:
-            city['region'] = 'West South Central'
-        if state_abbreviation in east_north_central:
-            city['region'] = 'East North Central'
-        if state_abbreviation in east_south_central:
-            city['region'] = 'East South Central'
-        if state_abbreviation in south_atlantic:
-            city['region'] = 'South Atlantic'
-        if state_abbreviation in middle_atlantic:
-            city['region'] = 'Middle Atlantic'
-        if state_abbreviation in new_england:
-            city['region'] = 'New England'
+        if state_abbreviation in west:
+            city['region'] = 'West'
+        if state_abbreviation in midwest:
+            city['region'] = 'Midwest'
+        if state_abbreviation in south:
+            city['region'] = 'South'
+        if state_abbreviation in northeast:
+            city['region'] = 'Northeast'
 
     master_json['nation']['people_per_household'] = round(
         master_json['nation']['pop'] / master_json['nation']['households'], 2)

@@ -58,7 +58,7 @@
             "pop_native": 241.0,
             "pop_other": 111.0,
             "pop_white": 50394.0,
-            "region": "Middle Atlantic",
+            "region": "Northeast",
             "state": "NY"
         },
         {
@@ -119,7 +119,7 @@
             "pop_native": 8.0,
             "pop_other": 30.0,
             "pop_white": 21124.0,
-            "region": "South Atlantic",
+            "region": "South",
             "state": "MD"
         },
         {
@@ -180,7 +180,7 @@
             "pop_native": 631.0,
             "pop_other": 592.0,
             "pop_white": 165309.0,
-            "region": "South Atlantic",
+            "region": "South",
             "state": "GA"
         },
         {
@@ -241,7 +241,7 @@
             "pop_native": 544.0,
             "pop_other": 447.0,
             "pop_white": 71445.0,
-            "region": "New England",
+            "region": "Northeast",
             "state": "ME"
         },
         {
@@ -302,7 +302,7 @@
             "pop_native": 1461.0,
             "pop_other": 1320.0,
             "pop_white": 431789.0,
-            "region": "West South Central",
+            "region": "South",
             "state": "TX"
         },
         {
@@ -363,7 +363,7 @@
             "pop_native": 432.0,
             "pop_other": 549.0,
             "pop_white": 83379.0,
-            "region": "West South Central",
+            "region": "South",
             "state": "LA"
         },
         {
@@ -424,7 +424,7 @@
             "pop_native": 2747.0,
             "pop_other": 34.0,
             "pop_white": 60273.0,
-            "region": "West North Central",
+            "region": "Midwest",
             "state": "ND"
         },
         {
@@ -485,7 +485,7 @@
             "pop_native": 1401.0,
             "pop_other": 322.0,
             "pop_white": 179049.0,
-            "region": "Mountain",
+            "region": "West",
             "state": "ID"
         },
         {
@@ -546,7 +546,7 @@
             "pop_native": 1125.0,
             "pop_other": 8411.0,
             "pop_white": 295886.0,
-            "region": "New England",
+            "region": "Northeast",
             "state": "MA"
         },
         {
@@ -607,7 +607,7 @@
             "pop_native": 1037.0,
             "pop_other": 172.0,
             "pop_white": 37485.0,
-            "region": "Mountain",
+            "region": "West",
             "state": "NV"
         },
         {
@@ -668,7 +668,7 @@
             "pop_native": 34.0,
             "pop_other": 58.0,
             "pop_white": 40970.0,
-            "region": "South Atlantic",
+            "region": "South",
             "state": "WV"
         },
         {
@@ -729,7 +729,7 @@
             "pop_native": 721.0,
             "pop_other": 43.0,
             "pop_white": 47932.0,
-            "region": "Mountain",
+            "region": "West",
             "state": "WY"
         },
         {
@@ -790,7 +790,7 @@
             "pop_native": 132.0,
             "pop_other": 226.0,
             "pop_white": 63442.0,
-            "region": "South Atlantic",
+            "region": "South",
             "state": "SC"
         },
         {
@@ -851,7 +851,7 @@
             "pop_native": 1246.0,
             "pop_other": 2925.0,
             "pop_white": 479231.0,
-            "region": "East North Central",
+            "region": "Midwest",
             "state": "OH"
         },
         {
@@ -912,7 +912,7 @@
             "pop_native": 21.0,
             "pop_other": 140.0,
             "pop_white": 38416.0,
-            "region": "New England",
+            "region": "Northeast",
             "state": "NH"
         },
         {
@@ -973,7 +973,7 @@
             "pop_native": 3661.0,
             "pop_other": 1489.0,
             "pop_white": 344954.0,
-            "region": "Mountain",
+            "region": "West",
             "state": "CO"
         },
         {
@@ -1034,7 +1034,7 @@
             "pop_native": 562.0,
             "pop_other": 467.0,
             "pop_white": 141916.0,
-            "region": "West North Central",
+            "region": "Midwest",
             "state": "IA"
         },
         {
@@ -1095,7 +1095,7 @@
             "pop_native": 150.0,
             "pop_other": 180.0,
             "pop_white": 15981.0,
-            "region": "South Atlantic",
+            "region": "South",
             "state": "DE"
         },
         {
@@ -1156,7 +1156,7 @@
             "pop_native": 41.0,
             "pop_other": 22.0,
             "pop_white": 20277.0,
-            "region": "East South Central",
+            "region": "South",
             "state": "KY"
         },
         {
@@ -1217,7 +1217,7 @@
             "pop_native": 56.0,
             "pop_other": 86.0,
             "pop_white": 12394.0,
-            "region": "Middle Atlantic",
+            "region": "Northeast",
             "state": "PA"
         },
         {
@@ -1278,7 +1278,7 @@
             "pop_native": 132.0,
             "pop_other": 793.0,
             "pop_white": 19268.0,
-            "region": "New England",
+            "region": "Northeast",
             "state": "CT"
         },
         {
@@ -1339,7 +1339,7 @@
             "pop_native": 712.0,
             "pop_other": 0.0,
             "pop_white": 26944.0,
-            "region": "Mountain",
+            "region": "West",
             "state": "MT"
         },
         {
@@ -1461,7 +1461,7 @@
             "pop_native": 1603.0,
             "pop_other": 2408.0,
             "pop_white": 481626.0,
-            "region": "East North Central",
+            "region": "Midwest",
             "state": "IN"
         },
         {
@@ -1522,7 +1522,7 @@
             "pop_native": 124.0,
             "pop_other": 18.0,
             "pop_white": 30167.0,
-            "region": "East South Central",
+            "region": "South",
             "state": "MS"
         },
         {
@@ -1583,7 +1583,7 @@
             "pop_native": 195.0,
             "pop_other": 531.0,
             "pop_white": 31889.0,
-            "region": "West North Central",
+            "region": "Midwest",
             "state": "MO"
         },
         {
@@ -1705,7 +1705,7 @@
             "pop_native": 411.0,
             "pop_other": 111.0,
             "pop_white": 63649.0,
-            "region": "East North Central",
+            "region": "Midwest",
             "state": "MI"
         },
         {
@@ -1766,7 +1766,7 @@
             "pop_native": 1259.0,
             "pop_other": 149.0,
             "pop_white": 220302.0,
-            "region": "West North Central",
+            "region": "Midwest",
             "state": "NE"
         },
         {
@@ -1827,7 +1827,7 @@
             "pop_native": 367.0,
             "pop_other": 415.0,
             "pop_white": 92678.0,
-            "region": "West South Central",
+            "region": "South",
             "state": "AR"
         },
         {
@@ -1888,7 +1888,7 @@
             "pop_native": 648.0,
             "pop_other": 203.0,
             "pop_white": 181439.0,
-            "region": "East North Central",
+            "region": "Midwest",
             "state": "WI"
         },
         {
@@ -1949,7 +1949,7 @@
             "pop_native": 404.0,
             "pop_other": 253.0,
             "pop_white": 68993.0,
-            "region": "East South Central",
+            "region": "South",
             "state": "AL"
         },
         {
@@ -2010,7 +2010,7 @@
             "pop_native": 0.0,
             "pop_other": 0.0,
             "pop_white": 7266.0,
-            "region": "New England",
+            "region": "Northeast",
             "state": "VT"
         },
         {
@@ -2071,7 +2071,7 @@
             "pop_native": 1657.0,
             "pop_other": 1643.0,
             "pop_white": 355145.0,
-            "region": "East South Central",
+            "region": "South",
             "state": "TN"
         },
         {
@@ -2132,7 +2132,7 @@
             "pop_native": 15853.0,
             "pop_other": 407.0,
             "pop_white": 337340.0,
-            "region": "West South Central",
+            "region": "South",
             "state": "OK"
         },
         {
@@ -2193,7 +2193,7 @@
             "pop_native": 357.0,
             "pop_other": 103.0,
             "pop_white": 38808.0,
-            "region": "Pacific",
+            "region": "West",
             "state": "WA"
         },
         {
@@ -2254,7 +2254,7 @@
             "pop_native": 25097.0,
             "pop_other": 1833.0,
             "pop_white": 680907.0,
-            "region": "Mountain",
+            "region": "West",
             "state": "AZ"
         },
         {
@@ -2315,7 +2315,7 @@
             "pop_native": 1423.0,
             "pop_other": 75.0,
             "pop_white": 11339.0,
-            "region": "West North Central",
+            "region": "Midwest",
             "state": "SD"
         },
         {
@@ -2376,7 +2376,7 @@
             "pop_native": 1569.0,
             "pop_other": 1319.0,
             "pop_white": 64189.0,
-            "region": "New England",
+            "region": "Northeast",
             "state": "RI"
         },
         {
@@ -2437,7 +2437,7 @@
             "pop_native": 1061.0,
             "pop_other": 1478.0,
             "pop_white": 230372.0,
-            "region": "South Atlantic",
+            "region": "South",
             "state": "NC"
         },
         {
@@ -2498,7 +2498,7 @@
             "pop_native": 303.0,
             "pop_other": 308.0,
             "pop_white": 85328.0,
-            "region": "South Atlantic",
+            "region": "South",
             "state": "VA"
         },
         {
@@ -2559,7 +2559,7 @@
             "pop_native": 1751.0,
             "pop_other": 1624.0,
             "pop_white": 160778.0,
-            "region": "Pacific",
+            "region": "West",
             "state": "CA"
         },
         {
@@ -2620,7 +2620,7 @@
             "pop_native": 2282.0,
             "pop_other": 267.0,
             "pop_white": 184630.0,
-            "region": "West North Central",
+            "region": "Midwest",
             "state": "MN"
         },
         {
@@ -2681,7 +2681,7 @@
             "pop_native": 1068.0,
             "pop_other": 793.0,
             "pop_white": 109329.0,
-            "region": "Pacific",
+            "region": "West",
             "state": "OR"
         },
         {
@@ -2742,7 +2742,7 @@
             "pop_native": 2060.0,
             "pop_other": 847.0,
             "pop_white": 124790.0,
-            "region": "Mountain",
+            "region": "West",
             "state": "UT"
         },
         {
@@ -2803,7 +2803,7 @@
             "pop_native": 1321.0,
             "pop_other": 284.0,
             "pop_white": 33294.0,
-            "region": "Mountain",
+            "region": "West",
             "state": "NM"
         },
         {
@@ -2864,7 +2864,7 @@
             "pop_native": 170.0,
             "pop_other": 593.0,
             "pop_white": 84772.0,
-            "region": "East North Central",
+            "region": "Midwest",
             "state": "IL"
         },
         {
@@ -2925,7 +2925,7 @@
             "pop_native": 333.0,
             "pop_other": 493.0,
             "pop_white": 96371.0,
-            "region": "South Atlantic",
+            "region": "South",
             "state": "FL"
         },
         {
@@ -2986,7 +2986,7 @@
             "pop_native": 2282.0,
             "pop_other": 267.0,
             "pop_white": 184630.0,
-            "region": "West North Central",
+            "region": "Midwest",
             "state": "KS"
         },
         {
@@ -3047,7 +3047,7 @@
             "pop_native": 34.0,
             "pop_other": 160.0,
             "pop_white": 11331.0,
-            "region": "Middle Atlantic",
+            "region": "Northeast",
             "state": "NJ"
         }
     ],
