@@ -1,3 +1,6 @@
+var buttonIDs=["btnAge", "btnCitizenship", "btnIncome", "btnEthnicity", "btnHousehold", "btnEducation"];
+var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "Household", "Education"];
+
 var svg = d3.select("svg");
 
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
@@ -31,7 +34,7 @@ var axis=group.append("g")
   .attr("class","axis")
   .call(xAxis);
 
-var rollover=group.append("text").style("text-anchor", "left").style("font-size", "25px").style("width",100).attr("transform", "translate(" + 50 + "," + 100 + ")");
+//var rollover=group.append("text").style("text-anchor", "left").style("font-size", "25px").style("width",100).attr("transform", "translate(" + 50 + "," + 100 + ")");
 
 renderInitial();
 
