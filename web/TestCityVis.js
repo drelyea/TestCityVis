@@ -18,6 +18,25 @@ var tooltip = d3.select("body").append("div")
 svg.attr("width", svgWidth).attr("height", svgHeight);
 applyGradient(svg);
 
+d3.select(".buttonDiv").append("rect")
+    .attr("class", "button")
+    .attr("id", "btnAge")
+    .text("Age")
+    .style("background-color", "#C8C8C8")
+    .on("click", function(d,i){
+        myFunction(this);
+    });
+
+for(i=1; i<6; i++){
+    d3.select(".buttonDiv").append("rect")
+        .attr("class", "button")
+        .attr("id", buttonIDs[i])
+        .text(buttonText[i])
+        .on("click", function(d,i){
+            myFunction(this);
+        });
+}
+
 var xScale = d3.scaleLinear().range([-10, width+10]),
     xAxis = d3.axisBottom(xScale);
 
@@ -33,8 +52,6 @@ var axis=group.append("g")
   .attr("transform", "translate(10," + yScale(0) + ")")
   .attr("class","axis")
   .call(xAxis);
-
-//var rollover=group.append("text").style("text-anchor", "left").style("font-size", "25px").style("width",100).attr("transform", "translate(" + 50 + "," + 100 + ")");
 
 renderInitial();
 
