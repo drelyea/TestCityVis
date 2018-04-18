@@ -29,20 +29,6 @@
 				<rect id="btnDiscover" class="button" style="width:40%" onclick="discover()">Discover</rect>
 			</div>
 		</div>
-	<script type="text/javascript">
-		window.onbeforeunload = function () {
-			window.scrollTo(0, 0);
-		}
-		function discover() {
-			window.scrollTo({
-			    top: document.getElementById('titleScreen').clientHeight,
-			    behavior: "smooth"
-			});
-			document.getElementById("body").style.overflowY = "visible";
-		}
-
-
-	</script>
 
 
 	<div align = 'center'>
@@ -63,6 +49,18 @@
 
 	<script type="text/javascript" src="TestCityVis.js"></script>
 	<script type="text/javascript">
+		window.onbeforeunload = function () {
+			window.scrollTo(0, 0);
+		}
+		function discover() {
+			window.scrollTo({
+			    top: document.getElementById('titleScreen').clientHeight,
+			    behavior: "smooth"
+			});
+			document.getElementById("body").style.overflowY = "visible";
+		}		
+
+
 		var boxCount=1;
 		var clicked = [{btn:"btnAge", gray:1},{btn:"btnCitizenship", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
 
