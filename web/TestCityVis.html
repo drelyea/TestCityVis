@@ -12,7 +12,38 @@
 
 	</head>
 
-	<body>
+
+
+	<body id="body" style="overflow-y: hidden">
+
+		<div style="height: 100%" id="titleScreen">
+			<div style="position: absolute; top: 15%; width:50%; left:25%" align='center'>
+				<h1>
+					Columbus, Ohio:<br>
+					Welcome to Test City, USA.
+				</h1>
+				<p>
+					Columbus, Ohio is considered a test city for marketing new products across the country.  Test Markets useful for companies to weed out which products will and will not be successful on a larger scale.  So what makes certain cities more or less useful to large corporations?  Certain Factors such as average age, gender, racial make-up, household income, are all factors in what makes a great test city.  This simulation allows you to explore how close other cities are to emulating Columbus and America in terms of these factors.<br><br>
+					Discover if your hometown is a good testing ground for you next big idea.
+				</p>
+				<rect id="btnDiscover" class="button" style="width:40%" onclick="discover()">Discover</rect>
+			</div>
+		</div>
+	<script type="text/javascript">
+		window.onbeforeunload = function () {
+			window.scrollTo(0, 0);
+		}
+		function discover() {
+			window.scrollTo({
+			    top: document.getElementById('titleScreen').clientHeight,
+			    behavior: "smooth"
+			});
+			document.getElementById("body").style.overflowY = "visible";
+		}
+
+
+	</script>
+
 
 	<div align = 'center'>
 		<h1 align='center'>

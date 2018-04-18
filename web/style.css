@@ -45,3 +45,7 @@ body {
 .axis line{
     stroke: white;
 }
+
+#btnDiscover:hover{
+    background-color: #1de5d6;
+}
