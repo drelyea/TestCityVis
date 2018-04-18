@@ -57,7 +57,9 @@
             "pop_latino": 9408.0,
             "pop_native": 241.0,
             "pop_other": 111.0,
-            "pop_white": 50394.0
+            "pop_white": 50394.0,
+            "region": "Northeast",
+            "state": "NY"
         },
         {
             "age": 37.2,
@@ -116,7 +118,9 @@
             "pop_latino": 7314.0,
             "pop_native": 8.0,
             "pop_other": 30.0,
-            "pop_white": 21124.0
+            "pop_white": 21124.0,
+            "region": "South",
+            "state": "MD"
         },
         {
             "age": 33.4,
@@ -175,7 +179,9 @@
             "pop_latino": 22495.0,
             "pop_native": 631.0,
             "pop_other": 592.0,
-            "pop_white": 165309.0
+            "pop_white": 165309.0,
+            "region": "South",
+            "state": "GA"
         },
         {
             "age": 33.3,
@@ -234,7 +240,9 @@
             "pop_latino": 8878.0,
             "pop_native": 544.0,
             "pop_other": 447.0,
-            "pop_white": 71445.0
+            "pop_white": 71445.0,
+            "region": "Northeast",
+            "state": "ME"
         },
         {
             "age": 32.1,
@@ -293,7 +301,9 @@
             "pop_latino": 306072.0,
             "pop_native": 1461.0,
             "pop_other": 1320.0,
-            "pop_white": 431789.0
+            "pop_white": 431789.0,
+            "region": "South",
+            "state": "TX"
         },
         {
             "age": 31.1,
@@ -352,7 +362,9 @@
             "pop_latino": 7444.0,
             "pop_native": 432.0,
             "pop_other": 549.0,
-            "pop_white": 83379.0
+            "pop_white": 83379.0,
+            "region": "South",
+            "state": "LA"
         },
         {
             "age": 37.0,
@@ -411,7 +423,9 @@
             "pop_latino": 1281.0,
             "pop_native": 2747.0,
             "pop_other": 34.0,
-            "pop_white": 60273.0
+            "pop_white": 60273.0,
+            "region": "Midwest",
+            "state": "ND"
         },
         {
             "age": 35.9,
@@ -470,7 +484,9 @@
             "pop_latino": 16883.0,
             "pop_native": 1401.0,
             "pop_other": 322.0,
-            "pop_white": 179049.0
+            "pop_white": 179049.0,
+            "region": "West",
+            "state": "ID"
         },
         {
             "age": 31.6,
@@ -529,7 +545,9 @@
             "pop_latino": 122317.0,
             "pop_native": 1125.0,
             "pop_other": 8411.0,
-            "pop_white": 295886.0
+            "pop_white": 295886.0,
+            "region": "Northeast",
+            "state": "MA"
         },
         {
             "age": 42.6,
@@ -588,7 +606,9 @@
             "pop_latino": 12342.0,
             "pop_native": 1037.0,
             "pop_other": 172.0,
-            "pop_white": 37485.0
+            "pop_white": 37485.0,
+            "region": "West",
+            "state": "NV"
         },
         {
             "age": 41.5,
@@ -647,7 +667,9 @@
             "pop_latino": 757.0,
             "pop_native": 34.0,
             "pop_other": 58.0,
-            "pop_white": 40970.0
+            "pop_white": 40970.0,
+            "region": "South",
+            "state": "WV"
         },
         {
             "age": 35.2,
@@ -706,7 +728,9 @@
             "pop_latino": 9072.0,
             "pop_native": 721.0,
             "pop_other": 43.0,
-            "pop_white": 47932.0
+            "pop_white": 47932.0,
+            "region": "West",
+            "state": "WY"
         },
         {
             "age": 28.1,
@@ -765,7 +789,9 @@
             "pop_latino": 7706.0,
             "pop_native": 132.0,
             "pop_other": 226.0,
-            "pop_white": 63442.0
+            "pop_white": 63442.0,
+            "region": "South",
+            "state": "SC"
         },
         {
             "age": 32.0,
@@ -824,7 +850,9 @@
             "pop_latino": 47007.0,
             "pop_native": 1246.0,
             "pop_other": 2925.0,
-            "pop_white": 479231.0
+            "pop_white": 479231.0,
+            "region": "Midwest",
+            "state": "OH"
         },
         {
             "age": 40.1,
@@ -883,7 +911,9 @@
             "pop_latino": 731.0,
             "pop_native": 21.0,
             "pop_other": 140.0,
-            "pop_white": 38416.0
+            "pop_white": 38416.0,
+            "region": "Northeast",
+            "state": "NH"
         },
         {
             "age": 34.1,
@@ -942,7 +972,9 @@
             "pop_latino": 201019.0,
             "pop_native": 3661.0,
             "pop_other": 1489.0,
-            "pop_white": 344954.0
+            "pop_white": 344954.0,
+            "region": "West",
+            "state": "CO"
         },
         {
             "age": 33.4,
@@ -1001,7 +1033,9 @@
             "pop_latino": 25864.0,
             "pop_native": 562.0,
             "pop_other": 467.0,
-            "pop_white": 141916.0
+            "pop_white": 141916.0,
+            "region": "Midwest",
+            "state": "IA"
         },
         {
             "age": 30.0,
@@ -1060,7 +1094,9 @@
             "pop_latino": 3588.0,
             "pop_native": 150.0,
             "pop_other": 180.0,
-            "pop_white": 15981.0
+            "pop_white": 15981.0,
+            "region": "South",
+            "state": "DE"
         },
         {
             "age": 37.6,
@@ -1119,7 +1155,9 @@
             "pop_latino": 1274.0,
             "pop_native": 41.0,
             "pop_other": 22.0,
-            "pop_white": 20277.0
+            "pop_white": 20277.0,
+            "region": "South",
+            "state": "KY"
         },
         {
             "age": 32.4,
@@ -1178,7 +1216,9 @@
             "pop_latino": 9399.0,
             "pop_native": 56.0,
             "pop_other": 86.0,
-            "pop_white": 12394.0
+            "pop_white": 12394.0,
+            "region": "Northeast",
+            "state": "PA"
         },
         {
             "age": 30.3,
@@ -1237,7 +1277,9 @@
             "pop_latino": 55208.0,
             "pop_native": 132.0,
             "pop_other": 793.0,
-            "pop_white": 19268.0
+            "pop_white": 19268.0,
+            "region": "Northeast",
+            "state": "CT"
         },
         {
             "age": 40.7,
@@ -1296,7 +1338,9 @@
             "pop_latino": 927.0,
             "pop_native": 712.0,
             "pop_other": 0.0,
-            "pop_white": 26944.0
+            "pop_white": 26944.0,
+            "region": "West",
+            "state": "MT"
         },
         {
             "age": 40.4,
@@ -1355,7 +1399,9 @@
             "pop_latino": 22068.0,
             "pop_native": 238.0,
             "pop_other": 331.0,
-            "pop_white": 58422.0
+            "pop_white": 58422.0,
+            "region": "Pacific",
+            "state": "HI"
         },
         {
             "age": 34.0,
@@ -1414,7 +1460,9 @@
             "pop_latino": 81381.0,
             "pop_native": 1603.0,
             "pop_other": 2408.0,
-            "pop_white": 481626.0
+            "pop_white": 481626.0,
+            "region": "Midwest",
+            "state": "IN"
         },
         {
             "age": 31.7,
@@ -1473,7 +1521,9 @@
             "pop_latino": 2630.0,
             "pop_native": 124.0,
             "pop_other": 18.0,
-            "pop_white": 30167.0
+            "pop_white": 30167.0,
+            "region": "South",
+            "state": "MS"
         },
         {
             "age": 37.9,
@@ -1532,7 +1582,9 @@
             "pop_latino": 1016.0,
             "pop_native": 195.0,
             "pop_other": 531.0,
-            "pop_white": 31889.0
+            "pop_white": 31889.0,
+            "region": "Midwest",
+            "state": "MO"
         },
         {
             "age": 37.0,
@@ -1591,7 +1643,9 @@
             "pop_latino": 1985.0,
             "pop_native": 3826.0,
             "pop_other": 144.0,
-            "pop_white": 21476.0
+            "pop_white": 21476.0,
+            "region": "Pacific",
+            "state": "AK"
         },
         {
             "age": 32.1,
@@ -1650,7 +1704,9 @@
             "pop_latino": 14077.0,
             "pop_native": 411.0,
             "pop_other": 111.0,
-            "pop_white": 63649.0
+            "pop_white": 63649.0,
+            "region": "Midwest",
+            "state": "MI"
         },
         {
             "age": 32.2,
@@ -1709,7 +1765,9 @@
             "pop_latino": 18560.0,
             "pop_native": 1259.0,
             "pop_other": 149.0,
-            "pop_white": 220302.0
+            "pop_white": 220302.0,
+            "region": "Midwest",
+            "state": "NE"
         },
         {
             "age": 36.0,
@@ -1768,7 +1826,9 @@
             "pop_latino": 12719.0,
             "pop_native": 367.0,
             "pop_other": 415.0,
-            "pop_white": 92678.0
+            "pop_white": 92678.0,
+            "region": "South",
+            "state": "AR"
         },
         {
             "age": 30.9,
@@ -1827,7 +1887,9 @@
             "pop_latino": 17025.0,
             "pop_native": 648.0,
             "pop_other": 203.0,
-            "pop_white": 181439.0
+            "pop_white": 181439.0,
+            "region": "Midwest",
+            "state": "WI"
         },
         {
             "age": 34.4,
@@ -1886,7 +1948,9 @@
             "pop_latino": 7245.0,
             "pop_native": 404.0,
             "pop_other": 253.0,
-            "pop_white": 68993.0
+            "pop_white": 68993.0,
+            "region": "South",
+            "state": "AL"
         },
         {
             "age": 43.0,
@@ -1945,7 +2009,9 @@
             "pop_latino": 99.0,
             "pop_native": 0.0,
             "pop_other": 0.0,
-            "pop_white": 7266.0
+            "pop_white": 7266.0,
+            "region": "Northeast",
+            "state": "VT"
         },
         {
             "age": 34.0,
@@ -2004,7 +2070,9 @@
             "pop_latino": 64509.0,
             "pop_native": 1657.0,
             "pop_other": 1643.0,
-            "pop_white": 355145.0
+            "pop_white": 355145.0,
+            "region": "South",
+            "state": "TN"
         },
         {
             "age": 33.7,
@@ -2063,7 +2131,9 @@
             "pop_latino": 111853.0,
             "pop_native": 15853.0,
             "pop_other": 407.0,
-            "pop_white": 337340.0
+            "pop_white": 337340.0,
+            "region": "South",
+            "state": "OK"
         },
         {
             "age": 37.3,
@@ -2122,7 +2192,9 @@
             "pop_latino": 3870.0,
             "pop_native": 357.0,
             "pop_other": 103.0,
-            "pop_white": 38808.0
+            "pop_white": 38808.0,
+            "region": "West",
+            "state": "WA"
         },
         {
             "age": 33.2,
@@ -2181,7 +2253,9 @@
             "pop_latino": 625378.0,
             "pop_native": 25097.0,
             "pop_other": 1833.0,
-            "pop_white": 680907.0
+            "pop_white": 680907.0,
+            "region": "West",
+            "state": "AZ"
         },
         {
             "age": 39.4,
@@ -2240,7 +2314,9 @@
             "pop_latino": 440.0,
             "pop_native": 1423.0,
             "pop_other": 75.0,
-            "pop_white": 11339.0
+            "pop_white": 11339.0,
+            "region": "Midwest",
+            "state": "SD"
         },
         {
             "age": 29.3,
@@ -2299,7 +2375,9 @@
             "pop_latino": 71887.0,
             "pop_native": 1569.0,
             "pop_other": 1319.0,
-            "pop_white": 64189.0
+            "pop_white": 64189.0,
+            "region": "Northeast",
+            "state": "RI"
         },
         {
             "age": 32.5,
@@ -2358,7 +2436,9 @@
             "pop_latino": 47992.0,
             "pop_native": 1061.0,
             "pop_other": 1478.0,
-            "pop_white": 230372.0
+            "pop_white": 230372.0,
+            "region": "South",
+            "state": "NC"
         },
         {
             "age": 32.9,
@@ -2417,7 +2497,9 @@
             "pop_latino": 13580.0,
             "pop_native": 303.0,
             "pop_other": 308.0,
-            "pop_white": 85328.0
+            "pop_white": 85328.0,
+            "region": "South",
+            "state": "VA"
         },
         {
             "age": 34.0,
@@ -2476,7 +2558,9 @@
             "pop_latino": 134951.0,
             "pop_native": 1751.0,
             "pop_other": 1624.0,
-            "pop_white": 160778.0
+            "pop_white": 160778.0,
+            "region": "West",
+            "state": "CA"
         },
         {
             "age": 39.7,
@@ -2535,7 +2619,9 @@
             "pop_latino": 22245.0,
             "pop_native": 2282.0,
             "pop_other": 267.0,
-            "pop_white": 184630.0
+            "pop_white": 184630.0,
+            "region": "Midwest",
+            "state": "MN"
         },
         {
             "age": 34.8,
@@ -2594,7 +2680,9 @@
             "pop_latino": 34786.0,
             "pop_native": 1068.0,
             "pop_other": 793.0,
-            "pop_white": 109329.0
+            "pop_white": 109329.0,
+            "region": "West",
+            "state": "OR"
         },
         {
             "age": 31.5,
@@ -2653,7 +2741,9 @@
             "pop_latino": 39262.0,
             "pop_native": 2060.0,
             "pop_other": 847.0,
-            "pop_white": 124790.0
+            "pop_white": 124790.0,
+            "region": "West",
+            "state": "UT"
         },
         {
             "age": 42.5,
@@ -2712,7 +2802,9 @@
             "pop_latino": 44888.0,
             "pop_native": 1321.0,
             "pop_other": 284.0,
-            "pop_white": 33294.0
+            "pop_white": 33294.0,
+            "region": "West",
+            "state": "NM"
         },
         {
             "age": 38.7,
@@ -2771,7 +2863,9 @@
             "pop_latino": 3046.0,
             "pop_native": 170.0,
             "pop_other": 593.0,
-            "pop_white": 84772.0
+            "pop_white": 84772.0,
+            "region": "Midwest",
+            "state": "IL"
         },
         {
             "age": 26.2,
@@ -2830,7 +2924,9 @@
             "pop_latino": 12663.0,
             "pop_native": 333.0,
             "pop_other": 493.0,
-            "pop_white": 96371.0
+            "pop_white": 96371.0,
+            "region": "South",
+            "state": "FL"
         },
         {
             "age": 39.7,
@@ -2889,7 +2985,9 @@
             "pop_latino": 22245.0,
             "pop_native": 2282.0,
             "pop_other": 267.0,
-            "pop_white": 184630.0
+            "pop_white": 184630.0,
+            "region": "Midwest",
+            "state": "KS"
         },
         {
             "age": 33.8,
@@ -2948,7 +3046,9 @@
             "pop_latino": 29703.0,
             "pop_native": 34.0,
             "pop_other": 160.0,
-            "pop_white": 11331.0
+            "pop_white": 11331.0,
+            "region": "Northeast",
+            "state": "NJ"
         }
     ],
     "nation": {

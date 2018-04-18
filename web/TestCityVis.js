@@ -6,11 +6,6 @@ var svg = d3.select("svg");
       svgWidth=960,
       svgHeight=500;
 
-yCords = [];
-for(i = 0; i < 51; i++){
-    yCords[i] = Math.random() * 100;
-}
-
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
@@ -18,11 +13,9 @@ var tooltip = d3.select("body").append("div")
 svg.attr("width", svgWidth).attr("height", svgHeight);
 applyGradient(svg);
 
-// setup x
 var xScale = d3.scaleLinear().range([-10, width+10]),
     xAxis = d3.axisBottom(xScale);
 
-// setup y
 var yScale = d3.scaleLinear().range([height, 50]),
     yAxis = d3.axisLeft(yScale);
 
@@ -33,7 +26,6 @@ yScale.domain([0, 100]);
 
 var group = svg.append("g");
 
-  // x-axis
 var axis=group.append("g")
   .attr("transform", "translate(10," + yScale(0) + ")")
   .attr("class","axis")
@@ -92,6 +84,7 @@ function genMultiData(points, clicked){
         }
         finalData[i] = val/rawData.length;
     }
+
     for(i = 0; i < points.length; i++){
         points[i]["data"] = finalData[i];
     }
@@ -109,7 +102,7 @@ function genMultiData(points, clicked){
 
 function genSingleData(points, clicked){
     buttonMap = ["age", "foreign", "income", "pop_white", "numHouse", "grads"];
-    unitMap = ["Years", "Percentage Foreign", "Dollars", "Percentage White", "Number of People", "Percent Graduated"];
+    unitMap = ["Years", "Percentage Citizens", "Dollars", "Percentage White", "Number of People", "Percent Graduated"];
     units = "";
     cat = "";
     for(i = 0; i < clicked.length; i++){
@@ -122,6 +115,7 @@ function genSingleData(points, clicked){
     for(i = 0; i < points.length; i++){
         finalData[i] = points[i][cat];
     }
+
     for(i = 0; i < points.length; i++){
         points[i]["data"] = finalData[i];
     }
@@ -133,15 +127,12 @@ function genSingleData(points, clicked){
 
     svg.selectAll(".axisLabel")
         .text(units);
-
 }
 
 function drawScatter(points, xScale){
-    //var xScale1 = d3.scaleLinear().range([10, width-10]),
+
     var xScale1 = xScale.range([10, width-10]);
     xAxis = d3.axisBottom(xScale1);
-
-    var color = [d3.rgb(0,139,139), d3.rgb(255,255,0), d3.rgb(255,69,0), d3.rgb(131,139,131), d3.rgb(255,0,0), d3.rgb(255,104,180)];
 
     axis.call(xAxis);
     svg.selectAll("circle")
@@ -149,27 +140,6 @@ function drawScatter(points, xScale){
         .transition()
         .attr("cx", function(d){
             return xScale(d.data);
-        })
-        .attr("cy", function(d,i) {
-            return yScale(yCords[i]);
-        })
-        .attr("r", function(d,i) {
-            return Math.log(d.pop/1000);//Math.log(d.pop);
-        })
-        .attr("fill", function(d, i){
-            return color[i%color.length];
-        })
-        .attr("stroke", "black");
-    svg.selectAll("circle")
-        .on("mouseover", function(d) {
-            tooltip.style("opacity", .9);
-            tooltip.html(d.name + "<br/>" + d.data)
-                .style("left", (d3.event.pageX + 15) + "px")
-                .style("top", (d3.event.pageY - 20) + "px");
-        })
-        .on("mouseout", function(d) {
-            tooltip.transition()
-                .style("opacity", 0);
         });
     drawLines(points,xScale);
 }
@@ -179,18 +149,37 @@ function drawInitialScatter(points){
     for(i = 0; i < points.length; i++){
         finalData[i] = points[i]["age"];
     }
+    popRay = []
     for(i = 0; i < points.length; i++){
         points[i]["data"] = finalData[i];
+        if(points[i]["name"] != "USA"){
+            popRay[i] = points[i]["pop"];
+        }
     }
     xScale = d3.scaleLinear()
         .domain(d3.extent(finalData))
         .range([20, width-20]);
-    //var xScale1 = d3.scaleLinear().range([10, width-10]),
+
     var xScale1 = xScale.range([10, width-10]);
     xAxis = d3.axisBottom(xScale1);
 
-    var color = [d3.rgb(0,139,139), d3.rgb(255,255,0), d3.rgb(255,69,0), d3.rgb(131,139,131), d3.rgb(255,0,0), d3.rgb(255,104,180)];
+    rScale = d3.scaleLinear()
+        .domain(d3.extent(popRay))
+        .range([4, 13]);
 
+    yCords = [];
+    for(i = 0; i < 51; i++){
+        yCords[i] = Math.random() * 100;
+    }
+
+    var color = [d3.rgb(0,139,139), d3.rgb(255,255,0), d3.rgb(255,69,0), d3.rgb(255,0,0), d3.rgb(255,104,180)];
+    regionMap = {
+        "Northeast": 0,
+        "South" : 1,
+        "Midwest" : 2,
+        "West" : 3,
+        "Pacific" : 4
+    };
     drawInitialLines(points,xScale);
 
     axis.call(xAxis);
@@ -206,22 +195,29 @@ function drawInitialScatter(points){
             return yScale(yCords[i]);
         })
         .attr("r", function(d,i) {
-            return Math.log(d.pop/1000);//Math.log(d.pop);
+            if(d.name == "USA" || d.name == "Columbus"){
+                return 0;
+            }
+            return rScale(d.pop);
         })
-        .attr("fill", function(d, i){
-            return color[i%color.length];
+        .attr("fill", function(d){
+            return color[regionMap[d.region]];
         })
         .attr("stroke", "black");
+
     svg.selectAll("circle")
         .on("mouseover", function(d) {
             tooltip.style("opacity", .9);
-            tooltip.html(d.name + "<br/>" + d.data)
+            var text = d.name + ", " + d.state;
+            tooltip.html(text + "<br/>" + d.data)
                 .style("left", (d3.event.pageX + 15) + "px")
                 .style("top", (d3.event.pageY - 20) + "px");
+            d3.select(this).attr("stroke","white");
         })
         .on("mouseout", function(d) {
             tooltip.transition()
                 .style("opacity", 0);
+            d3.select(this).attr("stroke","black");
         });
 
         svg.append("text")
@@ -244,6 +240,7 @@ function drawInitialLines(points,xScale){
                 .attr("y1", 30)
                 .attr("x2", xScale(points[i]["data"]))
                 .attr("y2", height)
+                .attr("stroke-width", 1)
                 .attr("stroke", "white");
 
             curText = points[i]["name"] + "Text";
@@ -265,48 +262,82 @@ function drawLines(points,xScale){
             svg.selectAll("." + curClass)
                 .transition()
                 .attr("x1", xScale(points[i]["data"]))
-                .attr("y1", 30)
-                .attr("x2", xScale(points[i]["data"]))
-                .attr("y2", height)
-                .attr("stroke", "white");
+                .attr("x2", xScale(points[i]["data"]));
 
             curText = points[i]["name"] + "Text";
             svg.selectAll("." + curText)
                 .transition()
                 .attr("x", xScale(points[i]["data"]));
+            if(points[i]["name"] == "USA"){
+                updateGradient(xScale(points[i]["data"]));
+            }
         }
     }
+}
+
+function updateGradient(xValue){
+    svg.selectAll(".leftGrad")
+        .transition()
+        .attr("width", xValue);
+
+    svg.selectAll(".rightGrad")
+        .transition()
+        .attr("x",xValue)
+        .attr("width", width-xValue);
 }
 
 function applyGradient(svg){
     var defs = svg.append("defs");
 
     var gradient = defs.append("linearGradient")
-       .attr("id", "gradient")
-       .attr("x1", "0%")
-       .attr("x2", "100%");
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("x2", "100%");
 
     gradient.append("stop")
-       .attr("class", "start")
-       .attr("offset", "0%")
-       .attr("stop-color", "#02012c")
-       .attr("stop-opactiy", 1);
+        .attr("class", "start")
+        .attr("offset", "0%")
+        .attr("stop-color", "#02012c")
+        .attr("stop-opactiy", 1);
 
     gradient.append("stop")
-      .attr("class", "end")
-      .attr("offset", "100%")
-      .attr("stop-color", "#848398")
-      .attr("stop-opactiy", 1);
+        .attr("class", "end")
+        .attr("offset", "100%")
+        .attr("stop-color", "#848398")
+        .attr("stop-opactiy", 1);
+
+    var gradient2 = defs.append("linearGradient")
+        .attr("id", "gradient2")
+        .attr("x1", "0%")
+        .attr("x2", "100%");
+
+    gradient2.append("stop")
+        .attr("class", "start")
+        .attr("offset", "0%")
+        .attr("stop-color", "#848398")
+        .attr("stop-opactiy", 1);
+
+    gradient2.append("stop")
+        .attr("class", "end")
+        .attr("offset", "100%")
+        .attr("stop-color", "#02012c")
+        .attr("stop-opactiy", 1);
 
     svg.append("rect")
-        .attr("width", width-20)
+        .attr("class", "leftGrad")
+        .attr("width", 607)
         .attr("height", height)
-        .attr("transform", "translate(20,0)")
         .attr("fill", "url(#gradient)");
 
     svg.append("rect")
-        .attr("width", width-20)
+        .attr("class", "rightGrad")
+        .attr("x",607)
+        .attr("width", width-607)
+        .attr("height", height)
+        .attr("fill", "url(#gradient2)");
+
+    svg.append("rect")
+        .attr("width", width)
         .attr("height", 30)
-        .attr("transform", "translate(20,0)")
         .attr("fill", "#02012c");
 }
