@@ -1,10 +1,12 @@
 var svg = d3.select("svg");
 
-  var margin = {top: 20, right: 20, bottom: 20, left: 40},
-      width = 960 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom,
-      svgWidth=960,
-      svgHeight=500;
+var margin = {top: 20, right: 20, bottom: 20, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom,
+    svgWidth=960,
+    svgHeight=500;
+
+var graphHeight = height-20;
 
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
@@ -16,10 +18,8 @@ applyGradient(svg);
 var xScale = d3.scaleLinear().range([-10, width+10]),
     xAxis = d3.axisBottom(xScale);
 
-var yScale = d3.scaleLinear().range([height, 50]),
+var yScale = d3.scaleLinear().range([graphHeight, 50]),
     yAxis = d3.axisLeft(yScale);
-
-var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 xScale.domain([28,44]);
 yScale.domain([0, 100]);
@@ -135,7 +135,7 @@ function drawScatter(points, xScale){
     xAxis = d3.axisBottom(xScale1);
 
     axis.call(xAxis);
-    svg.selectAll("circle")
+    svg.selectAll(".nodes")
         .data(points)
         .transition()
         .attr("cx", function(d){
@@ -173,6 +173,9 @@ function drawInitialScatter(points){
     }
 
     var color = [d3.rgb(0,139,139), d3.rgb(255,255,0), d3.rgb(255,69,0), d3.rgb(255,0,0), d3.rgb(255,104,180)];
+
+    drawLegend(color);
+
     regionMap = {
         "Northeast": 0,
         "South" : 1,
@@ -183,10 +186,11 @@ function drawInitialScatter(points){
     drawInitialLines(points,xScale);
 
     axis.call(xAxis);
-    svg.selectAll("circle")
+    svg.selectAll(".nodes")
         .data(points)
         .enter()
         .append("circle")
+        .attr("class","nodes")
         .transition()
         .attr("cx", function(d){
             return xScale(d.data);
@@ -239,7 +243,7 @@ function drawInitialLines(points,xScale){
                 .attr("x1", xScale(points[i]["data"]))
                 .attr("y1", 30)
                 .attr("x2", xScale(points[i]["data"]))
-                .attr("y2", height)
+                .attr("y2", graphHeight)
                 .attr("stroke-width", 1)
                 .attr("stroke", "white");
 
@@ -273,6 +277,33 @@ function drawLines(points,xScale){
             }
         }
     }
+}
+
+function drawLegend(color){
+    regions = ["Northeast:", "South:", "Midwest:", "West:", "Pacific:"];
+
+    var legend = svg.selectAll(".legend")
+        .data(color)
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) { return "translate(" + i * 100 + "," + (graphHeight + 20) + ")"; });
+
+    legend.append("circle")
+        .attr("cx", width/4)
+        .attr("cy", 9)
+        .attr("r", 8)
+        .style("fill", function(d){
+            return d;
+        });
+
+    legend.append("text")
+        .data(regions)
+        .attr("x", width/4 -15)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .attr("fill","white")
+        .text(function(d) {return d;});
 }
 
 function updateGradient(xValue){
@@ -326,14 +357,14 @@ function applyGradient(svg){
     svg.append("rect")
         .attr("class", "leftGrad")
         .attr("width", 607)
-        .attr("height", height)
+        .attr("height", graphHeight)
         .attr("fill", "url(#gradient)");
 
     svg.append("rect")
         .attr("class", "rightGrad")
         .attr("x",607)
         .attr("width", width-607)
-        .attr("height", height)
+        .attr("height", graphHeight)
         .attr("fill", "url(#gradient2)");
 
     svg.append("rect")
