@@ -12,8 +12,6 @@
 
 	</head>
 
-
-
 	<body id="body" style="overflow-y: hidden">
 
 		<div style="height: 100%" id="titleScreen">
@@ -31,20 +29,33 @@
 		</div>
 
 
-	<div align = 'center'>
-		<h1 align='center'>
-			USA Test Cities
-		</h1>
-		<svg></svg>
+	<div class="centerpanel" align = 'center'>
+		<svg id="graph"></svg>
 	</div>
 
-	<div class="buttonDiv" align = "center">
-		<!--<rect id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</rect>
-		<rect id="btnCitizenship" class="button" onclick="myFunction(this)">Citizenship</rect>
-		<rect id="btnIncome" class="button" onclick="myFunction(this)">Income</rect>
-		<rect id="btnEthnicity" class="button" onclick="myFunction(this)">Ethnicity</rect>
-		<rect id="btnHousehold" class="button" onclick="myFunction(this)"># of people per household</rect>
-		<rect id="btnEducation" class="button" onclick="myFunction(this)">Education</rect>-->
+	<div class="leftpanel">
+		<h1 align="center">
+			Test City, USA
+		</h1>
+		<p>
+			Choose one or multiple factors to compare:
+		</p>
+		<div class="buttonDiv">
+			<!--<rect id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</rect>
+			<rect id="btnCitizenship" class="button" onclick="myFunction(this)">Citizenship</rect>
+			<rect id="btnIncome" class="button" onclick="myFunction(this)">Income</rect>
+			<rect id="btnEthnicity" class="button" onclick="myFunction(this)">Ethnicity</rect>
+			<rect id="btnHousehold" class="button" onclick="myFunction(this)"># of people per household</rect>
+			<rect id="btnEducation" class="button" onclick="myFunction(this)">Education</rect>-->
+		</div>
+
+		<div class="rankpanel">
+			<p>Top Cities</p>
+				<div class="listbox">
+					<svg id="list">
+					</svg>
+				</div>
+		</div>
 	</div>
 
 	<script type="text/javascript" src="TestCityVis.js"></script>
@@ -83,7 +94,5 @@
 			renderData(clicked, boxCount);
 		}
 	</script>
-
-
 	</body>
 </html>

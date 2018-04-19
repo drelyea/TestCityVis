@@ -1,6 +1,40 @@
+@font-face {
+    font-family: "DIN Medium";
+    src: url("fonts/DINMedium.ttf");
+}
+
 body {
     background-color: #02012c;
     color: #ffffff;
+    font-family: "DIN Medium";
+}
+
+.listbox {
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 20px;
+    background-color: #02012c;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height:300px;
+    width:300px;
+}
+
+.rankpanel {
+}
+
+.leftpanel {
+    float: left;
+    width:25%;
+    height:100%;
+    margin-top:10px;
+}
+
+.centerpanel {
+    float: right;
+    width:75%;
+    height:100%;
+    margin-top:10px;
 }
 
 .links line {
@@ -24,14 +58,18 @@ body {
     background-color: #848398;
     color: #f6f6f7;
     color: black;
-    padding: 15px 20px;
+    padding: 11px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 15px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 32px;
+}
+
+#btnDiscover.button:hover {
+    background-color: #f6f6f7;
 }
 
 .axis text{
@@ -48,4 +86,8 @@ body {
 
 #btnDiscover:hover{
     background-color: #1de5d6;
+}
+
+.buttonDiv {
+    margin-left:15px;
 }

@@ -1,13 +1,14 @@
 var buttonIDs=["btnAge", "btnCitizenship", "btnIncome", "btnEthnicity", "btnHousehold", "btnEducation"];
 var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "Household", "Education"];
 
-var svg = d3.select("svg");
+var svg = d3.select("#graph");
+var listbox = d3.select("#list");
 
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom,
+    height = 600 - margin.top - margin.bottom,
     svgWidth=960,
-    svgHeight=500;
+    svgHeight=800;
 
 var graphHeight = height-20;
 
@@ -16,6 +17,7 @@ var tooltip = d3.select("body").append("div")
     .style("opacity", 0);
 
 svg.attr("width", svgWidth).attr("height", svgHeight);
+listbox.attr("width",300).attr("height",1500);
 applyGradient(svg);
 
 d3.select(".buttonDiv").append("rect")
@@ -59,6 +61,7 @@ function renderInitial(){
     d3.json("../data/data.json", render);
     function render(error, points){
         drawInitialScatter(points);
+        drawInitialList(points);
     }
 }
 
@@ -66,9 +69,9 @@ function renderData(clicked, boxCount){
     console.log(clicked);
     d3.json("../data/data.json", render);
     function render(error, points){
-        if(boxCount > 1){
+        if(boxCount > 1) {
             genMultiData(points, clicked);
-        } else{
+        } else {
             genSingleData(points, clicked);
         }
     }
@@ -114,9 +117,13 @@ function genMultiData(points, clicked){
         .range([20, width-20]);
 
     drawScatter(points,xScale);
+    drawList(points);
 
     svg.selectAll(".axisLabel")
         .text("Similarity Score");
+
+    svg.selectAll(".graphTitle")
+        .text("Average Similarity To The USA");
 
 }
 
@@ -144,9 +151,16 @@ function genSingleData(points, clicked){
         .range([20, width-20]);
 
     drawScatter(points,xScale);
+    drawList(points);
 
     svg.selectAll(".axisLabel")
         .text(units);
+
+    svg.selectAll(".graphTitle")
+        .text("Average " + units + " As Compared to the USA");
+
+    listbox.selectAll(".listtitle")
+        .text("Top " + units + " By City");
 }
 
 function drawScatter(points, xScale){
@@ -164,7 +178,77 @@ function drawScatter(points, xScale){
     drawLines(points,xScale);
 }
 
-function drawInitialScatter(points){
+function drawInitialList(points) {
+    colors = ["#393851","#494867"]; 
+    points.sort(sortData);
+    data = [];
+    for(i = 0; i < points.length; i++){
+        data[i] = points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["data"];
+    }
+    var g = listbox.append("g");
+    
+    g.append('rect')
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 300) 
+        .attr("height", 30)
+        .style("fill", "rgb(200, 200, 200)");
+
+    g.append("text")
+        .attr("x", 10)
+        .attr("y", 20)
+        .text("City")
+        .style("fill", "black")
+
+    var g1 = listbox.append("g");
+
+    g1.selectAll('rect').data(data)
+          .enter()
+          .append("rect")
+          .attr("x", 0)
+          .attr("y", function(d,i) {
+            return ((i*30)+30);
+           })
+          .attr("width", 300) 
+          .attr("height", 30)
+          .style("fill", function(d,i) {
+            return colors[i%2];
+          })
+          .text(function(d,i) {
+            return data[i];
+          });
+
+    g1.selectAll('text').data(data)
+          .enter()
+          .append("text")
+          .attr("x", 10)
+          .attr("y", function(d,i) {
+            return ((i*30)+50);
+           })          
+          .attr("class","listItems")
+          .style("fill", "white")
+          .text(function(d,i) {
+            return data[i];
+          });
+}
+
+function drawList(points) {
+    points.sort(sortData);
+    data = [];
+    for(i = 0; i < points.length; i++){
+        data[i] = points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["data"];
+    }
+
+    listbox.selectAll(".listItems")
+        .data(data)
+        .transition()
+        .text(function(d,i) {
+            console.log(data);
+            return data[i];
+        });
+}
+
+function drawInitialScatter(points) {
     finalData = [];
     for(i = 0; i < points.length; i++){
         finalData[i] = points[i]["age"];
@@ -243,6 +327,14 @@ function drawInitialScatter(points){
                 .style("opacity", 0);
             d3.select(this).attr("stroke","black");
         });
+
+        svg.append("text")
+            .text("Average Age As Compared To USA")
+            .attr("class", "graphTitle")
+            .attr("x", width/2)
+            .attr("y", 10)
+            .attr("text-anchor", "middle")
+            .attr("fill","white");
 
         svg.append("text")
             .text("Years")
@@ -391,4 +483,14 @@ function applyGradient(svg){
         .attr("width", width)
         .attr("height", 30)
         .attr("fill", "#02012c");
+}
+
+
+function sortData(a, b) {
+    if (a["data"] === b["data"]) {
+        return 0;
+    }
+    else {
+        return (a["data"] < b["data"]) ? -1 : 1;
+    }
 }
