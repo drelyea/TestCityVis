@@ -117,7 +117,7 @@ function genMultiData(points, clicked){
         .range([20, width-20]);
 
     drawScatter(points,xScale);
-    drawList(points);
+    drawList(points, true);
 
     svg.selectAll(".axisLabel")
         .text("Similarity Score");
@@ -151,7 +151,7 @@ function genSingleData(points, clicked){
         .range([20, width-20]);
 
     drawScatter(points,xScale);
-    drawList(points);
+    drawList(points, false);
 
     svg.selectAll(".axisLabel")
         .text(units);
@@ -232,18 +232,26 @@ function drawInitialList(points) {
           });
 }
 
-function drawList(points) {
-    points.sort(sortData);
+function drawList(points, isScore) {
+    if(isScore) { points.sort(sortScore)}
+    else { points.sort(sortData) };
+    console.log(points);
     data = [];
     for(i = 0; i < points.length; i++){
-        data[i] = points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["data"];
+        if(isScore) { 
+            var name = points[i]["name"] + ", " + points[i]["state"];
+            var score = Math.abs(points[i]["data"])*100;
+            data[i]=name+": " + Math.trunc(score);
+        }
+        else {
+            data[i] = points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["data"];
+        }
     }
 
     listbox.selectAll(".listItems")
         .data(data)
         .transition()
         .text(function(d,i) {
-            console.log(data);
             return data[i];
         });
 }
@@ -492,5 +500,14 @@ function sortData(a, b) {
     }
     else {
         return (a["data"] < b["data"]) ? -1 : 1;
+    }
+}
+
+function sortScore(a, b) {
+    if (a["data"] === b["data"]) {
+        return 0;
+    }
+    else {
+        return (Math.abs(a["data"]) > Math.abs(b["data"])) ? -1 : 1;
     }
 }
