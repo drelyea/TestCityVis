@@ -321,7 +321,7 @@ function drawInitialScatter(points) {
         })
         .attr("stroke", "black");
 
-    svg.selectAll("circle")
+    svg.selectAll("circle.nodes")
         .on("mouseover", function(d) {
             tooltip.style("opacity", .9);
             var text = d.name + ", " + d.state;
@@ -348,7 +348,7 @@ function drawInitialScatter(points) {
             .text("Years")
             .attr("class", "axisLabel")
             .attr("x", width/2)
-            .attr("y", height + 30)
+            .attr("y", height + 15)
             .attr("text-anchor", "middle")
             .attr("fill","white");
 
@@ -406,7 +406,7 @@ function drawLegend(color){
         .data(color)
         .enter().append("g")
         .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + i * 100 + "," + (graphHeight + 20) + ")"; });
+        .attr("transform", function(d, i) { return "translate(" + i * 100 + "," + (graphHeight + 50) + ")"; });
 
     legend.append("circle")
         .attr("cx", width/4)

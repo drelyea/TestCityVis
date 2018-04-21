@@ -12,87 +12,62 @@
 
 	</head>
 
-	<body id="body" style="overflow-y: hidden">
+	<body id="body">
 
-		<div style="height: 100%" id="titleScreen">
-			<div style="position: absolute; top: 15%; width:50%; left:25%" align='center'>
-				<h1>
-					Columbus, Ohio:<br>
-					Welcome to Test City, USA.
-				</h1>
-				<p>
-					Columbus, Ohio is considered a test city for marketing new products across the country.  Test Markets useful for companies to weed out which products will and will not be successful on a larger scale.  So what makes certain cities more or less useful to large corporations?  Certain Factors such as average age, gender, racial make-up, household income, are all factors in what makes a great test city.  This simulation allows you to explore how close other cities are to emulating Columbus and America in terms of these factors.<br><br>
-					Discover if your hometown is a good testing ground for you next big idea.
-				</p>
-				<rect id="btnDiscover" class="button" style="width:40%" onclick="discover()">Discover</rect>
+
+		<div class="centerpanel" align = 'center' >
+			<svg id="graph"></svg>
+		</div>
+
+		<div class="leftpanel">
+			<h1 align="center">
+				Test City, USA
+			</h1>
+			<p>
+				Choose one or multiple factors to compare:
+			</p>
+			<div class="buttonDiv">
+				<!--<rect id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</rect>
+				<rect id="btnCitizenship" class="button" onclick="myFunction(this)">Citizenship</rect>
+				<rect id="btnIncome" class="button" onclick="myFunction(this)">Income</rect>
+				<rect id="btnEthnicity" class="button" onclick="myFunction(this)">Ethnicity</rect>
+				<rect id="btnHousehold" class="button" onclick="myFunction(this)"># of people per household</rect>
+				<rect id="btnEducation" class="button" onclick="myFunction(this)">Education</rect>-->
+			</div>
+
+			<div class="rankpanel">
+				<p>Top Cities</p>
+					<div class="listbox">
+						<svg id="list">
+						</svg>
+					</div>
 			</div>
 		</div>
 
+		<script type="text/javascript" src="TestCityVis.js"></script>
+		<script type="text/javascript">
 
-	<div class="centerpanel" align = 'center'>
-		<svg id="graph"></svg>
-	</div>
+			var boxCount=1;
+			var clicked = [{btn:"btnAge", gray:1},{btn:"btnCitizenship", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
 
-	<div class="leftpanel">
-		<h1 align="center">
-			Test City, USA
-		</h1>
-		<p>
-			Choose one or multiple factors to compare:
-		</p>
-		<div class="buttonDiv">
-			<!--<rect id="btnAge" class="button" onclick="myFunction(this)" style="background-color: #C8C8C8">Age</rect>
-			<rect id="btnCitizenship" class="button" onclick="myFunction(this)">Citizenship</rect>
-			<rect id="btnIncome" class="button" onclick="myFunction(this)">Income</rect>
-			<rect id="btnEthnicity" class="button" onclick="myFunction(this)">Ethnicity</rect>
-			<rect id="btnHousehold" class="button" onclick="myFunction(this)"># of people per household</rect>
-			<rect id="btnEducation" class="button" onclick="myFunction(this)">Education</rect>-->
-		</div>
+			function myFunction(button) {
 
-		<div class="rankpanel">
-			<p>Top Cities</p>
-				<div class="listbox">
-					<svg id="list">
-					</svg>
-				</div>
-		</div>
-	</div>
+				if(window.getComputedStyle(button).getPropertyValue('background-color')!="rgb(132, 131, 152)" && boxCount>1){
+				    button.style.background="#848398";
+				    boxCount--;
+					clicked[clicked.map(function(e) { return e.btn; }).indexOf(button.id)]["gray"]=0;
 
-	<script type="text/javascript" src="TestCityVis.js"></script>
-	<script type="text/javascript">
-		window.onbeforeunload = function () {
-			window.scrollTo(0, 0);
-		}
-		function discover() {
-			window.scrollTo({
-			    top: document.getElementById('titleScreen').clientHeight,
-			    behavior: "smooth"
-			});
-			document.getElementById("body").style.overflowY = "visible";
-		}		
+				}
 
+				else if (window.getComputedStyle(button).getPropertyValue('background-color')=="rgb(132, 131, 152)" && boxCount>=1){
+					boxCount++
+					button.style.background="#C8C8C8";
+					clicked[clicked.map(function(e) { return e.btn; }).indexOf(button.id)]["gray"]=1;
 
-		var boxCount=1;
-		var clicked = [{btn:"btnAge", gray:1},{btn:"btnCitizenship", gray:0},{btn:"btnIncome", gray:0}, {btn:"btnEthnicity", gray:0},{btn:"btnHousehold", gray:0},{btn:"btnEducation", gray:0}];
+				}
 
-		function myFunction(button) {
-
-			if(window.getComputedStyle(button).getPropertyValue('background-color')!="rgb(132, 131, 152)" && boxCount>1){
-			    button.style.background="#848398";
-			    boxCount--;
-				clicked[clicked.map(function(e) { return e.btn; }).indexOf(button.id)]["gray"]=0;
-
+				renderData(clicked, boxCount);
 			}
-
-			else if (window.getComputedStyle(button).getPropertyValue('background-color')=="rgb(132, 131, 152)" && boxCount>=1){
-				boxCount++
-				button.style.background="#C8C8C8";
-				clicked[clicked.map(function(e) { return e.btn; }).indexOf(button.id)]["gray"]=1;
-
-			}
-
-			renderData(clicked, boxCount);
-		}
-	</script>
+		</script>
 	</body>
 </html>

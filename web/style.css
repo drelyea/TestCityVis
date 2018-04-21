@@ -68,7 +68,8 @@ body {
     border-radius: 32px;
 }
 
-#btnDiscover.button:hover {
+
+#btnDiscover.button {
     background-color: #f6f6f7;
 }
 
@@ -87,7 +88,10 @@ body {
 #btnDiscover:hover{
     background-color: #1de5d6;
 }
-
+#btnDiscover {
+    font-size: 28px;
+    font-weight: :bold;
+}
 .buttonDiv {
     margin-left:15px;
 }
