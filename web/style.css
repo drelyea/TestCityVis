@@ -69,6 +69,10 @@ body {
 }
 
 
+.graphTitle{
+    font-size: 20px;
+}
+
 #btnDiscover.button {
     background-color: #f6f6f7;
 }

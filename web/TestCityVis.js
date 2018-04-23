@@ -10,7 +10,9 @@ var margin = {top: 20, right: 20, bottom: 20, left: 40},
     svgWidth=960,
     svgHeight=800;
 
-var graphHeight = height-20;
+var graphStart = 50;
+var graphHeight = height-graphStart;
+
 
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
@@ -42,7 +44,7 @@ for(i=1; i<6; i++){
 var xScale = d3.scaleLinear().range([-10, width+10]),
     xAxis = d3.axisBottom(xScale);
 
-var yScale = d3.scaleLinear().range([graphHeight, 50]),
+var yScale = d3.scaleLinear().range([graphHeight, graphStart + 10]),
     yAxis = d3.axisLeft(yScale);
 
 xScale.domain([28,44]);
@@ -122,24 +124,23 @@ function genMultiData(points, clicked){
         .text("Similarity Score");
 
     svg.selectAll(".graphTitle")
-        .text("Average Similarity To The USA");
+        .text("Similarity of US Capital Cities");
 
 }
 
 function genSingleData(points, clicked){
     buttonMap = ["age", "foreign", "income", "pop_white", "numHouse", "grads"];
     unitMap = ["Years", "Percentage Citizens", "Dollars", "Percentage White", "Number of People", "Percent Graduated"];
-    units = "";
-    cat = "";
+    titleMap = ["Age", "Citizenship", "Income", "Population White", "Number of People Per Household", "Highschool Graduates"];
+    ind = 0;
     for(i = 0; i < clicked.length; i++){
         if(clicked[i]["gray"] == 1){
-            cat = buttonMap[i];
-            units = unitMap[i];
+            ind = i;
         }
     }
     finalData = [];
     for(i = 0; i < points.length; i++){
-        finalData[i] = points[i][cat];
+        finalData[i] = points[i][buttonMap[ind]];
     }
 
     for(i = 0; i < points.length; i++){
@@ -153,13 +154,10 @@ function genSingleData(points, clicked){
     drawList(points);
 
     svg.selectAll(".axisLabel")
-        .text(units);
+        .text(unitMap[ind]);
 
     svg.selectAll(".graphTitle")
-        .text("Average " + units + " As Compared to the USA");
-
-    listbox.selectAll(".listtitle")
-        .text("Top " + units + " By City");
+        .text("Average " + titleMap[ind] + " of US Capital Cities");
 }
 
 function drawScatter(points, xScale){
@@ -183,10 +181,12 @@ function createSimilarData(points){
         if(points[i]["name"] == "USA"){
             USAVal = points[i]["data"];
         }
-        //points[i]["similarData"] = 0;
     }
     for(i = 0; i < points.length; i++){
         points[i]["similarData"] = +(100 * (Math.abs(USAVal - points[i]["data"])/Math.abs(USAVal))).toFixed(3);
+        if(points[i]["similarData"] == 0 && points[i]["name"] != "USA"){
+            points[i]["similarData"] = 0.001;
+        }
     }
 }
 
@@ -208,12 +208,6 @@ function drawInitialList(points) {
         .attr("width", 300)
         .attr("height", 30)
         .style("fill", "rgb(200, 200, 200)");
-
-    g.append("text")
-        .attr("x", 10)
-        .attr("y", 20)
-        .text("City")
-        .style("fill", "black")
 
     var g1 = listbox.append("g");
 
@@ -349,7 +343,7 @@ function drawInitialScatter(points) {
             .text("Average Age As Compared To USA")
             .attr("class", "graphTitle")
             .attr("x", width/2)
-            .attr("y", 12)
+            .attr("y", 17)
             .attr("text-anchor", "middle")
             .attr("fill","white");
 
@@ -357,7 +351,7 @@ function drawInitialScatter(points) {
             .text("Years")
             .attr("class", "axisLabel")
             .attr("x", width/2)
-            .attr("y", height + 15)
+            .attr("y", graphHeight + 40)
             .attr("text-anchor", "middle")
             .attr("fill","white");
 }
@@ -369,7 +363,7 @@ function drawInitialLines(points,xScale){
             svg.append("line")
                 .attr("class", curClass)
                 .attr("x1", xScale(points[i]["data"]))
-                .attr("y1", 30)
+                .attr("y1", graphStart)
                 .attr("x2", xScale(points[i]["data"]))
                 .attr("y2", graphHeight)
                 .attr("stroke-width", 1)
@@ -380,9 +374,10 @@ function drawInitialLines(points,xScale){
                 .text(points[i]["name"] + ", " + points[i]["data"])
                 .attr("class", curText)
                 .attr("x", xScale(points[i]["data"]))
-                .attr("y", 27)
+                .attr("y", graphStart-5)
                 .attr("text-anchor", "middle")
-                .attr("fill","white");
+                .attr("fill","white")
+                .style("font-size", "14px");
         }
     }
 }
@@ -498,7 +493,7 @@ function applyGradient(svg){
 
     svg.append("rect")
         .attr("width", width)
-        .attr("height", 30)
+        .attr("height", graphStart)
         .attr("fill", "#02012c");
 }
 
