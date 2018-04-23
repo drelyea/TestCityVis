@@ -66,7 +66,6 @@ function renderInitial(){
 }
 
 function renderData(clicked, boxCount){
-    console.log(clicked);
     d3.json("../data/data.json", render);
     function render(error, points){
         if(boxCount > 1) {
@@ -109,7 +108,7 @@ function genMultiData(points, clicked){
     }
 
     for(i = 0; i < points.length; i++){
-        points[i]["data"] = finalData[i];
+        points[i]["data"] = finalData[i].toFixed(3);
     }
 
     xScale = d3.scaleLinear()
@@ -117,7 +116,7 @@ function genMultiData(points, clicked){
         .range([20, width-20]);
 
     drawScatter(points,xScale);
-    drawList(points, true);
+    drawList(points);
 
     svg.selectAll(".axisLabel")
         .text("Similarity Score");
@@ -144,14 +143,14 @@ function genSingleData(points, clicked){
     }
 
     for(i = 0; i < points.length; i++){
-        points[i]["data"] = finalData[i];
+        points[i]["data"] = +finalData[i].toFixed(3);
     }
     xScale = d3.scaleLinear()
         .domain(d3.extent(finalData))
         .range([20, width-20]);
 
     drawScatter(points,xScale);
-    drawList(points, false);
+    drawList(points);
 
     svg.selectAll(".axisLabel")
         .text(units);
@@ -178,19 +177,35 @@ function drawScatter(points, xScale){
     drawLines(points,xScale);
 }
 
+function createSimilarData(points){
+    var USAVal = 0;
+    for(i = 0; i < points.length; i++){
+        if(points[i]["name"] == "USA"){
+            USAVal = points[i]["data"];
+        }
+        //points[i]["similarData"] = 0;
+    }
+    for(i = 0; i < points.length; i++){
+        points[i]["similarData"] = +(100 * (Math.abs(USAVal - points[i]["data"])/Math.abs(USAVal))).toFixed(3);
+    }
+}
+
 function drawInitialList(points) {
-    colors = ["#393851","#494867"]; 
+    colors = ["#393851","#494867"];
+    createSimilarData(points);
     points.sort(sortData);
     data = [];
     for(i = 0; i < points.length; i++){
-        data[i] = points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["data"];
+        if(points[i]["name"] != "USA"){
+            data[i] = i + ") " + points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["similarData"] + "%";
+        }
     }
     var g = listbox.append("g");
-    
+
     g.append('rect')
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 300) 
+        .attr("width", 300)
         .attr("height", 30)
         .style("fill", "rgb(200, 200, 200)");
 
@@ -207,9 +222,9 @@ function drawInitialList(points) {
           .append("rect")
           .attr("x", 0)
           .attr("y", function(d,i) {
-            return ((i*30)+30);
+            return (((i-2)*30)+30);
            })
-          .attr("width", 300) 
+          .attr("width", 300)
           .attr("height", 30)
           .style("fill", function(d,i) {
             return colors[i%2];
@@ -223,8 +238,8 @@ function drawInitialList(points) {
           .append("text")
           .attr("x", 10)
           .attr("y", function(d,i) {
-            return ((i*30)+50);
-           })          
+            return (((i-2)*30)+50);
+           })
           .attr("class","listItems")
           .style("fill", "white")
           .text(function(d,i) {
@@ -232,19 +247,13 @@ function drawInitialList(points) {
           });
 }
 
-function drawList(points, isScore) {
-    if(isScore) { points.sort(sortScore)}
-    else { points.sort(sortData) };
-    console.log(points);
+function drawList(points) {
+    createSimilarData(points);
+    points.sort(sortData);
     data = [];
     for(i = 0; i < points.length; i++){
-        if(isScore) { 
-            var name = points[i]["name"] + ", " + points[i]["state"];
-            var score = Math.abs(points[i]["data"])*100;
-            data[i]=name+": " + Math.trunc(score);
-        }
-        else {
-            data[i] = points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["data"];
+        if(points[i]["name"] != "USA"){
+            data[i] = i + ") " + points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["similarData"] + "%";
         }
     }
 
@@ -281,7 +290,7 @@ function drawInitialScatter(points) {
 
     yCords = [];
     for(i = 0; i < 51; i++){
-        yCords[i] = Math.random() * 100;
+        yCords[i] = (i+1)*2;
     }
 
     var color = [d3.rgb(0,139,139), d3.rgb(255,255,0), d3.rgb(255,69,0), d3.rgb(255,0,0), d3.rgb(255,104,180)];
@@ -298,7 +307,7 @@ function drawInitialScatter(points) {
     drawInitialLines(points,xScale);
 
     axis.call(xAxis);
-    svg.selectAll(".nodes")
+    var nodes = svg.selectAll(".nodes")
         .data(points)
         .enter()
         .append("circle")
@@ -340,7 +349,7 @@ function drawInitialScatter(points) {
             .text("Average Age As Compared To USA")
             .attr("class", "graphTitle")
             .attr("x", width/2)
-            .attr("y", 10)
+            .attr("y", 12)
             .attr("text-anchor", "middle")
             .attr("fill","white");
 
@@ -351,7 +360,6 @@ function drawInitialScatter(points) {
             .attr("y", height + 15)
             .attr("text-anchor", "middle")
             .attr("fill","white");
-
 }
 
 function drawInitialLines(points,xScale){
@@ -369,10 +377,10 @@ function drawInitialLines(points,xScale){
 
             curText = points[i]["name"] + "Text";
             svg.append("text")
-                .text(points[i]["name"])
+                .text(points[i]["name"] + ", " + points[i]["data"])
                 .attr("class", curText)
                 .attr("x", xScale(points[i]["data"]))
-                .attr("y", 25)
+                .attr("y", 27)
                 .attr("text-anchor", "middle")
                 .attr("fill","white");
         }
@@ -391,6 +399,7 @@ function drawLines(points,xScale){
             curText = points[i]["name"] + "Text";
             svg.selectAll("." + curText)
                 .transition()
+                .text(points[i]["name"] + ", " + points[i]["data"])
                 .attr("x", xScale(points[i]["data"]));
             if(points[i]["name"] == "USA"){
                 updateGradient(xScale(points[i]["data"]));
@@ -493,21 +502,11 @@ function applyGradient(svg){
         .attr("fill", "#02012c");
 }
 
-
 function sortData(a, b) {
-    if (a["data"] === b["data"]) {
+    if (a["similarData"] === b["similarData"]) {
         return 0;
     }
     else {
-        return (a["data"] < b["data"]) ? -1 : 1;
-    }
-}
-
-function sortScore(a, b) {
-    if (a["data"] === b["data"]) {
-        return 0;
-    }
-    else {
-        return (Math.abs(a["data"]) > Math.abs(b["data"])) ? -1 : 1;
+        return (a["similarData"] < b["similarData"]) ? -1 : 1;
     }
 }
