@@ -225,6 +225,20 @@ function drawInitialList(points) {
           })
           .text(function(d,i) {
             return data[i];
+          })
+          .on("mouseover", function(d,i) {
+                var cir = d3.selectAll(".nodes")
+                    .filter(function(d) {
+                        return d.name == points[i]["name"];
+                });
+                cir.attr("stroke","white");
+          })
+          .on("mouseout", function(d,i) {
+              var cir = d3.selectAll(".nodes")
+                  .filter(function(d) {
+                      return d.name == points[i]["name"];
+              });
+              cir.attr("stroke","black");
           });
 
     g1.selectAll('text').data(data)
@@ -238,6 +252,20 @@ function drawInitialList(points) {
           .style("fill", "white")
           .text(function(d,i) {
             return data[i];
+          })
+          .on("mouseover", function(d,i) {
+                var cir = d3.selectAll(".nodes")
+                    .filter(function(d) {
+                        return d.name == points[i]["name"];
+                });
+                cir.attr("stroke","white");
+          })
+          .on("mouseout", function(d,i) {
+              var cir = d3.selectAll(".nodes")
+                  .filter(function(d) {
+                      return d.name == points[i]["name"];
+              });
+              cir.attr("stroke","black");
           });
 }
 
