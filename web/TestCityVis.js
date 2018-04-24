@@ -1,5 +1,5 @@
 var buttonIDs=["btnAge", "btnCitizenship", "btnIncome", "btnEthnicity", "btnHousehold", "btnEducation"];
-var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "Household", "Education"];
+var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "People Per Household", "Education"];
 
 var svg = d3.select("#graph");
 var listbox = d3.select("#list");
@@ -293,7 +293,7 @@ function drawInitialScatter(points) {
         yCords[i] = (i+1)*2;
     }
 
-    var color = [d3.rgb(0,139,139), d3.rgb(255,255,0), d3.rgb(255,69,0), d3.rgb(255,0,0), d3.rgb(255,104,180)];
+    var color = ["#1de5d6", "#eb6018", "#d1d42a", "#afafaf", "#e98bff"];
 
     drawLegend(color);
 
