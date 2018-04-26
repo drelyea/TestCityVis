@@ -349,6 +349,16 @@ function drawInitialScatter(points) {
             if(d.name == "USA" || d.name == "Columbus"){
                 return 0;
             }
+            else if (d.pop<100000){
+                return 4;
+            }
+            else if (d.pop>=100000 && d.pop<=600000){
+                return 8;
+            }
+            else if (d.pop > 600000){
+                return 15;
+            }
+
             return rScale(d.pop);
         })
         .attr("fill", function(d){
@@ -459,6 +469,59 @@ function drawLegend(color){
         .style("text-anchor", "end")
         .attr("fill","white")
         .text(function(d) {return d;});
+
+
+    /*regions = ["NE:", "S:", "MW:", "W:", "Pac:"];
+    popRanges = ["> 600,000", "100,000-600,000", "< 100,000"];
+    popRadii = [15,8,4];
+
+    var legend = svg.selectAll(".legend")
+        .data(color)
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) { return "translate(" + (i-2) * 75 + "," + (graphHeight + 50) + ")"; });
+
+    legend.append("circle")
+        .attr("cx", width/4)
+        .attr("cy", 9)
+        .attr("r", 8)
+        .style("fill", function(d){
+            return d;
+        });
+
+    legend.append("text")
+        .data(regions)
+        .attr("x", width/4 -15)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .attr("fill","white")
+        .text(function(d) {return d;});
+
+
+    var popLegend = svg.selectAll(".popLegend")
+        .data(popRanges)
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) { return "translate(" + (i+4) * 100 + "," + (graphHeight + 50) + ")"; });
+
+    popLegend.append("circle")
+        .attr("cx", width/4)
+        .attr("cy", 9)
+        .attr("r", function(d,i){
+            return popRadii[i];
+        })
+        .style("fill", "#afafaf");
+
+    popLegend.append("text")
+        .data(popRanges)
+        .attr("x", width/4 -15)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .attr("fill","white")
+        .text(function(d) {return d;});
+*/
 }
 
 function updateGradient(xValue){
