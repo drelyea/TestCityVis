@@ -190,10 +190,12 @@ function createSimilarData(points){
     }
 }
 
+listOrder = [];
 function drawInitialList(points) {
     colors = ["#393851","#494867"];
     createSimilarData(points);
     points.sort(sortData);
+    listOrder = points;
     data = [];
     for(i = 0; i < points.length; i++){
         if(points[i]["name"] != "USA"){
@@ -229,14 +231,14 @@ function drawInitialList(points) {
           .on("mouseover", function(d,i) {
                 var cir = d3.selectAll(".nodes")
                     .filter(function(d) {
-                        return d.name == points[i]["name"];
+                        return d.name == listOrder[i]["name"];
                 });
                 cir.attr("stroke","white");
           })
           .on("mouseout", function(d,i) {
               var cir = d3.selectAll(".nodes")
                   .filter(function(d) {
-                      return d.name == points[i]["name"];
+                      return d.name == listOrder[i]["name"];
               });
               cir.attr("stroke","black");
           });
@@ -256,7 +258,7 @@ function drawInitialList(points) {
           .on("mouseover", function(d,i) {
                 var cir = d3.selectAll(".nodes")
                     .filter(function(d) {
-                        return d.name == points[i]["name"];
+                        return d.name == listOrder[i]["name"];
                 });
                 cir.attr("stroke","white");
           })
@@ -272,6 +274,7 @@ function drawInitialList(points) {
 function drawList(points) {
     createSimilarData(points);
     points.sort(sortData);
+    listOrder = points;
     data = [];
     for(i = 0; i < points.length; i++){
         if(points[i]["name"] != "USA"){
