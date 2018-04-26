@@ -2,6 +2,7 @@ var buttonIDs=["btnAge", "btnCitizenship", "btnIncome", "btnEthnicity", "btnHous
 var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "People Per Household", "Education"];
 
 var svg = d3.select("#graph");
+svg.attr('transform', 'translate(0,130)');
 var listbox = d3.select("#list");
 
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
