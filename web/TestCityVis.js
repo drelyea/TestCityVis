@@ -2,16 +2,16 @@ var buttonIDs=["btnAge", "btnCitizenship", "btnIncome", "btnEthnicity", "btnHous
 var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "People Per Household", "Education"];
 
 var svg = d3.select("#graph");
-svg.attr('transform', 'translate(0,130)');
+svg.attr('transform', 'translate(0,20)');
 var listbox = d3.select("#list");
 
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 960 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom,
+    height = 600 - margin.top - margin.bottom+300,
     svgWidth=960,
-    svgHeight=800;
+    svgHeight=850;
 
-var graphStart = 50;
+var graphStart = 150;
 var graphHeight = height-graphStart;
 
 
@@ -405,8 +405,7 @@ function drawInitialLines(points,xScale){
             svg.append("text")
                 .text(points[i]["name"] + ", " + points[i]["data"])
                 .attr("class", curText)
-                .attr("x", xScale(points[i]["data"]))
-                .attr("y", graphStart-5)
+                .attr('transform', 'translate(' + (xScale(points[i]["data"])+5) + ',' + (graphStart-40-(points[i]["name"].length*1.5)) +  ') rotate(90)')
                 .attr("text-anchor", "middle")
                 .attr("fill","white")
                 .style("font-size", "14px");
@@ -427,7 +426,7 @@ function drawLines(points,xScale){
             svg.selectAll("." + curText)
                 .transition()
                 .text(points[i]["name"] + ", " + points[i]["data"])
-                .attr("x", xScale(points[i]["data"]));
+                .attr('transform', 'translate(' + (xScale(points[i]["data"])+5) + ',' + (graphStart-45-(points[i]["name"].length*1.5)) +  ') rotate(90)')
             if(points[i]["name"] == "USA"){
                 updateGradient(xScale(points[i]["data"]));
             }
