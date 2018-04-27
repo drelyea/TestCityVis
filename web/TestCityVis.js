@@ -385,7 +385,7 @@ function drawInitialScatter(points) {
             .text("Average Age As Compared To USA")
             .attr("class", "graphTitle")
             .attr("x", width/2)
-            .attr("y", 17)
+            .attr("y", 50)
             .attr("text-anchor", "middle")
             .attr("fill","white");
 
@@ -412,7 +412,7 @@ function drawInitialLines(points,xScale){
             cbusValue = xScale(points[i]["data"])
         }
     }
-    if(Math.abs(usaValue-cbusValue) < 30){
+    if(Math.abs(usaValue-cbusValue) < 100){
         usaBuffer = 30;
     }
 
@@ -460,7 +460,7 @@ function drawLines(points,xScale){
             cbusValue = xScale(points[i]["data"])
         }
     }
-    if(Math.abs(usaValue-cbusValue) < 30){
+    if(Math.abs(usaValue-cbusValue) < 100){
         usaBuffer = 30;
     }
 
