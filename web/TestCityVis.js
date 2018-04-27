@@ -446,12 +446,13 @@ function drawLines(points,xScale){
 
 function drawLegend(color){
     regions = ["Northeast:", "South:", "Midwest:", "West:", "Pacific:"];
+    offsets = [0, -10, 0, -10, -10]
 
     var legend = svg.selectAll(".legend")
         .data(color)
         .enter().append("g")
         .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + i * 100 + "," + (graphHeight + 50) + ")"; });
+        .attr("transform", function(d, i) { return "translate(" + (i * 100 + offsets[i] - 130) + "," + (graphHeight + 50) + ")"; });
 
     legend.append("circle")
         .attr("cx", width/4)
@@ -471,39 +472,17 @@ function drawLegend(color){
         .text(function(d) {return d;});
 
 
-    /*regions = ["NE:", "S:", "MW:", "W:", "Pac:"];
-    popRanges = ["> 600,000", "100,000-600,000", "< 100,000"];
+    regions = ["NE:", "S:", "MW:", "W:", "Pac:"];
+    popRanges = ["\76 600,000", "100,000-600,000", "\74 100,000"];
+    offsets = [0, 20, -10]
     popRadii = [15,8,4];
-
-    var legend = svg.selectAll(".legend")
-        .data(color)
-        .enter().append("g")
-        .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + (i-2) * 75 + "," + (graphHeight + 50) + ")"; });
-
-    legend.append("circle")
-        .attr("cx", width/4)
-        .attr("cy", 9)
-        .attr("r", 8)
-        .style("fill", function(d){
-            return d;
-        });
-
-    legend.append("text")
-        .data(regions)
-        .attr("x", width/4 -15)
-        .attr("y", 9)
-        .attr("dy", ".35em")
-        .style("text-anchor", "end")
-        .attr("fill","white")
-        .text(function(d) {return d;});
 
 
     var popLegend = svg.selectAll(".popLegend")
         .data(popRanges)
         .enter().append("g")
         .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + (i+4) * 100 + "," + (graphHeight + 50) + ")"; });
+        .attr("transform", function(d, i) { return "translate(" + (i * 150 + 410 + offsets[i]) + "," + (graphHeight + 50) + ")"; });
 
     popLegend.append("circle")
         .attr("cx", width/4)
@@ -515,13 +494,13 @@ function drawLegend(color){
 
     popLegend.append("text")
         .data(popRanges)
-        .attr("x", width/4 -15)
+        .attr("x", width/4 -20)
         .attr("y", 9)
         .attr("dy", ".35em")
         .style("text-anchor", "end")
         .attr("fill","white")
         .text(function(d) {return d;});
-*/
+
 }
 
 function updateGradient(xValue){
