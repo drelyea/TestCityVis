@@ -389,6 +389,23 @@ function drawInitialScatter(points) {
 }
 
 function drawInitialLines(points,xScale){
+
+    var usaBuffer = 10;
+    var cbusBuffer = 10;
+    var usaValue = 0;
+    var cbusValue = 0;
+    for(i = 0; i < points.length; i++){
+        if(points[i]["name"] == "USA"){
+            usaValue = xScale(points[i]["data"])
+        }
+        if(points[i]["name"] == "Columbus"){
+            cbusValue = xScale(points[i]["data"])
+        }
+    }
+    if(Math.abs(usaValue-cbusValue) < 30){
+        usaBuffer = 30;
+    }
+
     for(i = 0; i < points.length; i++){
         if(points[i]["name"] == "USA" || points[i]["name"] == "Columbus" ){
             curClass = points[i]["name"] + "Line";
@@ -401,11 +418,17 @@ function drawInitialLines(points,xScale){
                 .attr("stroke-width", 1)
                 .attr("stroke", "white");
 
+            if(points[i]["name"] == "USA"){
+                currBuffer = usaBuffer;
+            } else{
+                currBuffer = cbusBuffer;
+            }
+
             curText = points[i]["name"] + "Text";
             svg.append("text")
                 .text(points[i]["name"] + ", " + points[i]["data"])
                 .attr("class", curText)
-                .attr('transform', 'translate(' + (xScale(points[i]["data"])+5) + ',' + (graphStart-40-(points[i]["name"].length*1.5)) +  ') rotate(90)')
+                .attr('transform', 'translate(' + (xScale(points[i]["data"])+5) + ',' + (graphStart-currBuffer) +  ')')
                 .attr("text-anchor", "middle")
                 .attr("fill","white")
                 .style("font-size", "14px");
@@ -414,6 +437,24 @@ function drawInitialLines(points,xScale){
 }
 
 function drawLines(points,xScale){
+
+    var usaBuffer = 10;
+    var cbusBuffer = 10;
+    var usaValue = 0;
+    var cbusValue = 0;
+    for(i = 0; i < points.length; i++){
+        if(points[i]["name"] == "USA"){
+            usaValue = xScale(points[i]["data"])
+        }
+        if(points[i]["name"] == "Columbus"){
+            cbusValue = xScale(points[i]["data"])
+        }
+    }
+    if(Math.abs(usaValue-cbusValue) < 30){
+        usaBuffer = 30;
+    }
+
+    var currBuffer = 10;
     for(i = 0; i < points.length; i++){
         if(points[i]["name"] == "USA" || points[i]["name"] == "Columbus" ){
             curClass = points[i]["name"] + "Line";
@@ -422,11 +463,17 @@ function drawLines(points,xScale){
                 .attr("x1", xScale(points[i]["data"]))
                 .attr("x2", xScale(points[i]["data"]));
 
+            if(points[i]["name"] == "USA"){
+                currBuffer = usaBuffer;
+            } else{
+                currBuffer = cbusBuffer;
+            }
+
             curText = points[i]["name"] + "Text";
             svg.selectAll("." + curText)
                 .transition()
                 .text(points[i]["name"] + ", " + points[i]["data"])
-                .attr('transform', 'translate(' + (xScale(points[i]["data"])+5) + ',' + (graphStart-45-(points[i]["name"].length*1.5)) +  ') rotate(90)')
+                .attr('transform', 'translate(' + (xScale(points[i]["data"])+5) + ',' + (graphStart-currBuffer) +  ')')
             if(points[i]["name"] == "USA"){
                 updateGradient(xScale(points[i]["data"]));
             }
