@@ -1,16 +1,20 @@
-var buttonIDs=["btnAge", "btnCitizenship", "btnIncome", "btnEthnicity", "btnHousehold", "btnEducation"];
+//Define buttons
+var buttonIDs = ["btnAge", "btnCitizenship", "btnIncome", "btnEthnicity", "btnHousehold", "btnEducation"];
 var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "People Per Household", "Education"];
 
+//Select SVG and list element
 var svg = d3.select("#graph");
 svg.attr('transform', 'translate(0,20)');
 var listbox = d3.select("#list");
 
+//Set margins
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 960 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom+300,
     svgWidth=960,
     svgHeight=850;
 
+//Set up graph height and tooltip
 var graphStart = 150;
 var graphHeight = height-graphStart;
 
@@ -19,6 +23,7 @@ var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+//Apply background and set list box size
 svg.attr("width", svgWidth).attr("height", svgHeight);
 listbox.attr("width",300).attr("height",1500);
 applyGradient(svg);
@@ -32,6 +37,8 @@ d3.select(".buttonDiv").append("rect")
         myFunction(this);
     });
 
+
+//Handle button click
 for(i=1; i<6; i++){
     d3.select(".buttonDiv").append("rect")
         .attr("class", "button")
@@ -42,6 +49,7 @@ for(i=1; i<6; i++){
         });
 }
 
+//Set up scale
 var xScale = d3.scaleLinear().range([-10, width+10]),
     xAxis = d3.axisBottom(xScale);
 
@@ -53,6 +61,7 @@ yScale.domain([0, 100]);
 
 var group = svg.append("g");
 
+//Add axis
 var axis=group.append("g")
   .attr("transform", "translate(10," + yScale(0) + ")")
   .attr("class","axis")
@@ -60,6 +69,7 @@ var axis=group.append("g")
 
 renderInitial();
 
+//Render Initial start state
 function renderInitial(){
     d3.json("../data/data.json", render);
     function render(error, points){
@@ -68,6 +78,7 @@ function renderInitial(){
     }
 }
 
+//Render data based on selection
 function renderData(clicked, boxCount){
     d3.json("../data/data.json", render);
     function render(error, points){
@@ -79,6 +90,7 @@ function renderData(clicked, boxCount){
     }
 }
 
+//Generate data for multi-select
 function genMultiData(points, clicked){
     var rawData = new Array();
     buttonMap = ["age", "foreign", "income", "pop_white", "numHouse", "grads"];
@@ -129,6 +141,7 @@ function genMultiData(points, clicked){
 
 }
 
+//Generate data for single select
 function genSingleData(points, clicked){
     buttonMap = ["age", "foreign", "income", "pop_white", "numHouse", "grads"];
     unitMap = ["Years", "Percentage Citizens", "Dollars", "Percent of Residents Who Identify as White", "Number of People", "Percent Graduated"];
@@ -161,6 +174,7 @@ function genSingleData(points, clicked){
         .text("Average " + titleMap[ind] + " of US Capital Cities");
 }
 
+//Draw scatter points
 function drawScatter(points, xScale){
 
     var xScale1 = xScale.range([10, width-10]);
@@ -176,6 +190,7 @@ function drawScatter(points, xScale){
     drawLines(points,xScale);
 }
 
+//Create data for list
 function createSimilarData(points){
     var USAVal = 0;
     for(i = 0; i < points.length; i++){
@@ -192,6 +207,7 @@ function createSimilarData(points){
 }
 
 listOrder = [];
+//Draw intial list
 function drawInitialList(points) {
     colors = ["#393851","#494867"];
     createSimilarData(points);
@@ -272,6 +288,7 @@ function drawInitialList(points) {
           });
 }
 
+//Draw sidebar list
 function drawList(points) {
     createSimilarData(points);
     points.sort(sortData);
@@ -292,6 +309,7 @@ function drawList(points) {
 }
 
 function drawInitialScatter(points,clicked, boxCount) {
+
     finalData = [];
     for(i = 0; i < points.length; i++){
         finalData[i] = points[i]["age"];
@@ -415,6 +433,7 @@ function drawInitialScatter(points,clicked, boxCount) {
             .attr("fill","white");
 }
 
+//Draw initial USA and Columbus vertical lines
 function drawInitialLines(points,xScale){
 
     var usaBuffer = 10;
@@ -463,6 +482,7 @@ function drawInitialLines(points,xScale){
     }
 }
 
+//Update lines on data change
 function drawLines(points,xScale){
 
     var usaBuffer = 10;
@@ -508,6 +528,7 @@ function drawLines(points,xScale){
     }
 }
 
+//Draw legend
 function drawLegend(color){
     regions = ["Northeast:", "South:", "Midwest:", "West:", "Pacific:"];
     offsets = [0, -10, 0, -10, -10]
@@ -567,6 +588,7 @@ function drawLegend(color){
 
 }
 
+//Update gradient on data change
 function updateGradient(xValue){
     svg.selectAll(".leftGrad")
         .transition()
@@ -578,6 +600,7 @@ function updateGradient(xValue){
         .attr("width", width-xValue);
 }
 
+//Apply gradient to background
 function applyGradient(svg){
     var defs = svg.append("defs");
 
@@ -619,14 +642,16 @@ function applyGradient(svg){
         .attr("class", "leftGrad")
         .attr("width", 607)
         .attr("height", graphHeight)
-        .attr("fill", "url(#gradient)");
+        .attr("fill", "url(#gradient)")
+        .style("opacity", .75);
 
     svg.append("rect")
         .attr("class", "rightGrad")
         .attr("x",607)
         .attr("width", width-607)
         .attr("height", graphHeight)
-        .attr("fill", "url(#gradient2)");
+        .attr("fill", "url(#gradient2)")
+        .style("opacity", .75);
 
     svg.append("rect")
         .attr("width", width)
@@ -634,6 +659,7 @@ function applyGradient(svg){
         .attr("fill", "#02012c");
 }
 
+//Sort function
 function sortData(a, b) {
     if (a["similarData"] === b["similarData"]) {
         return 0;
