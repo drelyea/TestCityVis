@@ -103,6 +103,7 @@ body {
     margin-left: 15px;
 }
 
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -124,4 +125,8 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #C8C8C8; 
+}
+
+.legend text {
+    font-family: "Arial" !important;
 }

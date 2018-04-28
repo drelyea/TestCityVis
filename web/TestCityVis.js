@@ -63,7 +63,7 @@ renderInitial();
 function renderInitial(){
     d3.json("../data/data.json", render);
     function render(error, points){
-        drawInitialScatter(points);
+        drawInitialScatter(points,clicked, boxCount);
         drawInitialList(points);
     }
 }
@@ -131,7 +131,7 @@ function genMultiData(points, clicked){
 
 function genSingleData(points, clicked){
     buttonMap = ["age", "foreign", "income", "pop_white", "numHouse", "grads"];
-    unitMap = ["Years", "Percentage Citizens", "Dollars", "Percentage White", "Number of People", "Percent Graduated"];
+    unitMap = ["Years", "Percentage Citizens", "Dollars", "Percent of Residents Who Identify as White", "Number of People", "Percent Graduated"];
     titleMap = ["Age", "Citizenship", "Income", "Population White", "Number of People Per Household", "Highschool Graduates"];
     ind = 0;
     for(i = 0; i < clicked.length; i++){
@@ -241,7 +241,7 @@ function drawInitialList(points) {
                   .filter(function(d) {
                       return d.name == listOrder[i]["name"];
               });
-              cir.attr("stroke","black");
+              cir.attr("stroke", "none");
           });
 
     g1.selectAll('text').data(data)
@@ -268,7 +268,7 @@ function drawInitialList(points) {
                   .filter(function(d) {
                       return d.name == points[i]["name"];
               });
-              cir.attr("stroke","black");
+              cir.attr("stroke", "none");
           });
 }
 
@@ -291,7 +291,7 @@ function drawList(points) {
         });
 }
 
-function drawInitialScatter(points) {
+function drawInitialScatter(points,clicked, boxCount) {
     finalData = [];
     for(i = 0; i < points.length; i++){
         finalData[i] = points[i]["age"];
@@ -364,21 +364,38 @@ function drawInitialScatter(points) {
         .attr("fill", function(d){
             return color[regionMap[d.region]];
         })
-        .attr("stroke", "black");
+        .attr("stroke", "none");
 
     svg.selectAll("circle.nodes")
         .on("mouseover", function(d) {
             tooltip.style("opacity", .9);
-            var text = d.name + ", " + d.state;
-            tooltip.html(text + "<br/>" + d.data)
-                .style("left", (d3.event.pageX + 15) + "px")
-                .style("top", (d3.event.pageY - 20) + "px");
-            d3.select(this).attr("stroke","white");
+            var text = d.name + ", " + d.state; 
+
+            //income, add $
+            if(boxCount==1 && clicked[2]["gray"]==1){
+                tooltip.html(text + "<br/>$" + (d.data).toLocaleString('en'))
+                    .style("left", (d3.event.pageX + 15) + "px")
+                    .style("top", (d3.event.pageY - 20) + "px");
+                d3.select(this).attr("stroke","white");
+            }
+            //citizenship, ethnicity, education, add %
+            else if(boxCount==1 && (clicked[1]["gray"]==1 || clicked[3]["gray"]==1 || clicked[5]["gray"]==1)){
+                tooltip.html(text + "<br/>" + (d.data).toLocaleString('en') + "%")
+                    .style("left", (d3.event.pageX + 15) + "px")
+                    .style("top", (d3.event.pageY - 20) + "px");
+                d3.select(this).attr("stroke","white");
+            }
+            else {
+                tooltip.html(text + "<br/>" + (d.data).toLocaleString('en'))
+                    .style("left", (d3.event.pageX + 15) + "px")
+                    .style("top", (d3.event.pageY - 20) + "px");
+                d3.select(this).attr("stroke","white");
+            }
         })
         .on("mouseout", function(d) {
             tooltip.transition()
                 .style("opacity", 0);
-            d3.select(this).attr("stroke","black");
+            d3.select(this).attr("stroke", "none");
         });
 
         svg.append("text")
@@ -499,7 +516,7 @@ function drawLegend(color){
         .data(color)
         .enter().append("g")
         .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + (i * 100 + offsets[i] - 130) + "," + (graphHeight + 50) + ")"; });
+        .attr("transform", function(d, i) { return "translate(" + (i * 100 + offsets[i] - 130) + "," + (graphHeight + 60) + ")"; });
 
     legend.append("circle")
         .attr("cx", width/4)
@@ -529,7 +546,7 @@ function drawLegend(color){
         .data(popRanges)
         .enter().append("g")
         .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + (i * 150 + 410 + offsets[i]) + "," + (graphHeight + 50) + ")"; });
+        .attr("transform", function(d, i) { return "translate(" + (i * 150 + 410 + offsets[i]) + "," + (graphHeight + 60) + ")"; });
 
     popLegend.append("circle")
         .attr("cx", width/4)
