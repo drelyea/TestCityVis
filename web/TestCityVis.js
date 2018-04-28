@@ -202,7 +202,7 @@ function createSimilarData(points){
     }
     for(i = 0; i < points.length; i++){
         points[i]["similarData"] = +(100 * (Math.abs(USAVal - points[i]["data"])/Math.abs(USAVal))).toFixed(3);
-        if(points[i]["similarData"] == 0 && points[i]["name"] != "USA"){
+        if (points[i]["similarData"] == 0 && points[i]["name"] != "USA") {
             points[i]["similarData"] = 0.001;
         }
     }
@@ -234,8 +234,8 @@ function drawInitialList(points) {
         .attr("rx", 10)
         .attr("ry", 10)
         .on("mouseover", function(d,i) {
-            infobar.transition() 
-            .style("opacity", 0.8)       
+            infobar.transition()
+            .style("opacity", 0.8)
             .duration(200)
                 infobar.append("rect")
                 .attr("x", 0)
@@ -264,9 +264,9 @@ function drawInitialList(points) {
                 .attr("fill","black")
 
         })
-        .on("mouseout", function(d) {       
-            infobar.transition()        
-            .duration(500)      
+        .on("mouseout", function(d) {
+            infobar.transition()
+            .duration(500)
             .style("opacity", 0);
         });
 
@@ -281,7 +281,9 @@ function drawInitialList(points) {
     listOrder = points;
     data = [];
     for(i = 0; i < points.length; i++){
-        if(points[i]["name"] != "USA"){
+        if (points[i]["name"] == "USA") {
+            data[i] = i + ") " + points[i]["name"] + ": " + points[i]["similarData"] + "%";
+        } else {
             data[i] = i + ") " + points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["similarData"] + "%";
         }
     }
@@ -301,7 +303,7 @@ function drawInitialList(points) {
           .append("rect")
           .attr("x", 0)
           .attr("y", function(d,i) {
-            return (((i-2)*30)+30);
+            return (((i-1)*30)+30);
            })
           .attr("width", 300)
           .attr("height", 30)
@@ -331,7 +333,7 @@ function drawInitialList(points) {
           .append("text")
           .attr("x", 10)
           .attr("y", function(d,i) {
-            return (((i-2)*30)+50);
+            return (((i-1)*30)+50);
            })
           .attr("class","listItems")
           .style("fill", "white")
@@ -348,7 +350,7 @@ function drawInitialList(points) {
           .on("mouseout", function(d,i) {
               var cir = d3.selectAll(".nodes")
                   .filter(function(d) {
-                      return d.name == points[i]["name"];
+                      return d.name == listOrder[i]["name"];
               });
               cir.attr("stroke", "none");
           });
@@ -360,8 +362,10 @@ function drawList(points) {
     points.sort(sortData);
     listOrder = points;
     data = [];
-    for(i = 0; i < points.length; i++){
-        if(points[i]["name"] != "USA"){
+    for (i = 0; i < points.length; i++) {
+        if (points[i]["name"] == "USA") {
+            data[i] = i + ") " + points[i]["name"] + ": " + points[i]["similarData"] + "%";
+        } else {
             data[i] = i + ") " + points[i]["name"] + ", " + points[i]["state"] + ": " + points[i]["similarData"] + "%";
         }
     }
@@ -453,7 +457,7 @@ function drawInitialScatter(points,clicked, boxCount) {
     svg.selectAll("circle.nodes")
         .on("mouseover", function(d) {
             tooltip.style("opacity", .9);
-            var text = d.name + ", " + d.state; 
+            var text = d.name + ", " + d.state;
 
             //income, add $
             if(boxCount==1 && clicked[2]["gray"]==1){
