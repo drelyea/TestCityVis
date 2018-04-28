@@ -6,6 +6,7 @@ var buttonText=["Age", "Citizenship", "Income", "Ethnicity", "People Per Househo
 var svg = d3.select("#graph");
 svg.attr('transform', 'translate(0,20)');
 var listbox = d3.select("#list");
+var listtitle = d3.select("#listtitle");
 
 //Set margins
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
@@ -26,6 +27,7 @@ var tooltip = d3.select("body").append("div")
 //Apply background and set list box size
 svg.attr("width", svgWidth).attr("height", svgHeight);
 listbox.attr("width",300).attr("height",1500);
+listtitle.attr("width",310).attr("height",60);
 applyGradient(svg);
 
 d3.select(".buttonDiv").append("rect")
@@ -209,6 +211,70 @@ function createSimilarData(points){
 listOrder = [];
 //Draw intial list
 function drawInitialList(points) {
+
+    var title = listtitle.append("g");
+    var infobar = listtitle.append("g");
+
+    title.append("text")
+            .text("Percent Difference From USA")
+            .attr("class", "listtitle")
+            .attr("text-anchor", "middle")
+            .attr("fill","white")
+            .attr("x", 110)
+            .attr("y", 20);
+
+    title.append("rect")
+        .attr("fill","white")
+        .attr("x", 230)
+        .attr("y", 5)
+        .attr("width", 20)
+        .attr("height", 20)
+        .attr("cursor", "pointer")
+        .attr("class","infobutton")
+        .attr("rx", 10)
+        .attr("ry", 10)
+        .on("mouseover", function(d,i) {
+            infobar.transition() 
+            .style("opacity", 0.8)       
+            .duration(200)
+                infobar.append("rect")
+                .attr("x", 0)
+                .attr("y", 28)
+                .attr("width", 280)
+                .attr("height", 30)
+                .attr("rx", 10)
+                .attr("ry", 10)
+                .attr("fill", "white")
+                .style("font-size", 20)
+                infobar.append("text")
+                .text("Percent difference is calculated by adding the factors")
+                .attr("x", 10)
+                .attr("y", 40)
+                .attr("font-size",11)
+                .attr("width", 280)
+                .attr("height", 60)
+                .attr("fill","black")
+                infobar.append("text")
+                .text("you selected and comparing them to the average US.")
+                .attr("x", 10)
+                .attr("y", 50)
+                .attr("font-size",11)
+                .attr("width", 200)
+                .attr("height", 60)
+                .attr("fill","black")
+
+        })
+        .on("mouseout", function(d) {       
+            infobar.transition()        
+            .duration(500)      
+            .style("opacity", 0);
+        });
+
+        title.append("text")
+        .text("?")
+        .attr("x", 235)
+        .attr("y", 20)
+
     colors = ["#393851","#494867"];
     createSimilarData(points);
     points.sort(sortData);

@@ -10,7 +10,6 @@ body {
 }
 
 .listbox {
-    margin-top: 20px;
     margin-left: 15px;
     margin-right: 20px;
     background-color: #02012c;
@@ -65,6 +64,30 @@ body {
     border-radius: 32px;
 }
 
+.infobutton {
+    background-color: white;
+    opacity: 0.8;
+    color: black;
+    cursor: pointer;
+    border-radius: 32px;
+    display: inline-block;
+    margin-left:8px;
+}
+
+#textpopup{
+    opacity: 0;
+    transition: all 0.5s;
+    visibility: hidden;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+#info:hover #textpopup{
+    background: darkgrey;
+    color:black;
+    opacity: 1;
+    visibility: visible;
+}
 
 .graphTitle{
     font-size: 26px;
