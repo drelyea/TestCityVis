@@ -10,12 +10,12 @@ var listbox = d3.select("#list");
 //Set margins
 var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 960 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom+300,
+    height = 330 - margin.top - margin.bottom+300,
     svgWidth=960,
-    svgHeight=850;
+    svgHeight=610;
 
 //Set up graph height and tooltip
-var graphStart = 150;
+var graphStart = 50;
 var graphHeight = height-graphStart;
 
 
@@ -53,11 +53,11 @@ for(i=1; i<6; i++){
 var xScale = d3.scaleLinear().range([-10, width+10]),
     xAxis = d3.axisBottom(xScale);
 
-var yScale = d3.scaleLinear().range([graphHeight, graphStart + 10]),
+var yScale = d3.scaleLinear().range([graphHeight, graphStart + 30]),
     yAxis = d3.axisLeft(yScale);
 
 xScale.domain([28,44]);
-yScale.domain([0, 100]);
+yScale.domain([0, 130]);
 
 var group = svg.append("g");
 
@@ -420,7 +420,7 @@ function drawInitialScatter(points,clicked, boxCount) {
             .text("Average Age As Compared To USA")
             .attr("class", "graphTitle")
             .attr("x", width/2)
-            .attr("y", 50)
+            .attr("y", 20)
             .attr("text-anchor", "middle")
             .attr("fill","white");
 
@@ -537,7 +537,7 @@ function drawLegend(color){
         .data(color)
         .enter().append("g")
         .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + (i * 100 + offsets[i] - 130) + "," + (graphHeight + 60) + ")"; });
+        .attr("transform", function(d, i) { return "translate(" + (i * 100 + offsets[i] - 130) + "," + (graphHeight + 45) + ")"; });
 
     legend.append("circle")
         .attr("cx", width/4)
@@ -567,7 +567,7 @@ function drawLegend(color){
         .data(popRanges)
         .enter().append("g")
         .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + (i * 150 + 410 + offsets[i]) + "," + (graphHeight + 60) + ")"; });
+        .attr("transform", function(d, i) { return "translate(" + (i * 150 + 410 + offsets[i]) + "," + (graphHeight + 45) + ")"; });
 
     popLegend.append("circle")
         .attr("cx", width/4)

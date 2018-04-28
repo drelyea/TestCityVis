@@ -16,11 +16,8 @@ body {
     background-color: #02012c;
     overflow-y: auto;
     overflow-x: hidden;
-    height:450px;
+    height:300px;
     width:300px;
-}
-
-.rankpanel {
 }
 
 .leftpanel {
@@ -62,7 +59,7 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 15px;
+    font-size: 12px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 32px;
