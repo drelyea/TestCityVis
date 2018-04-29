@@ -378,6 +378,7 @@ function drawList(points) {
         });
 }
 
+//draw inital scatter plot
 function drawInitialScatter(points,clicked, boxCount) {
 
     finalData = [];
