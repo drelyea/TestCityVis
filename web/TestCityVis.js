@@ -16,7 +16,7 @@ var margin = {top: 20, right: 20, bottom: 20, left: 40},
     svgHeight=610;
 
 //Set up graph height and tooltip
-var graphStart = 50;
+var graphStart = 80;
 var graphHeight = height-graphStart;
 
 
