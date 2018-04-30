@@ -52,10 +52,10 @@ for(i=1; i<6; i++){
 }
 
 //Set up scale
-var xScale = d3.scaleLinear().range([-10, width+10]),
+var xScale = d3.scaleLinear().range([20, width-20]),
     xAxis = d3.axisBottom(xScale);
 
-var yScale = d3.scaleLinear().range([graphHeight, graphStart + 30]),
+var yScale = d3.scaleLinear().range([graphHeight, 30]),
     yAxis = d3.axisLeft(yScale);
 
 xScale.domain([28,44]);
@@ -65,7 +65,7 @@ var group = svg.append("g");
 
 //Add axis
 var axis=group.append("g")
-  .attr("transform", "translate(10," + yScale(0) + ")")
+  .attr("transform", "translate(0," + yScale(0) + ")")
   .attr("class","axis")
   .call(xAxis);
 
@@ -115,13 +115,41 @@ function genMultiData(points, clicked){
             rawData[i][j] = xScale(rawData[i][j]);
         }
     }
+
     finalData = [];
-    for(i = 0; i < rawData[0].length; i++){
+    min = 5;
+    max = -5;
+    USAval = 0;
+    for (i = 0; i < rawData[0].length; i++) {
         val = 0;
-        for(j = 0; j < rawData.length; j++){
+        for (j = 0; j < rawData.length; j++) {
             val += rawData[j][i];
         }
-        finalData[i] = val/rawData.length;
+        finalData[i] = val / rawData.length;
+
+        if (points[i]["name"] == "USA") USAval = finalData[i];
+        if (finalData[i] < min) {
+            min = finalData[i];
+        }
+        if (finalData[i] > max) {
+            max = finalData[i];
+        }
+    }
+
+    xScaleLow = d3.scaleLinear()
+        .domain([min, USAval])
+        .range([-1, 0]);
+
+    xScaleHigh = d3.scaleLinear()
+        .domain([USAval, max])
+        .range([0, 1]);
+
+    for (i = 0; i < finalData.length; i++) {
+        if (finalData[i] < USAval) {
+            finalData[i] = xScaleLow(finalData[i]);
+        } else {
+            finalData[i] = xScaleHigh(finalData[i]);
+        }
     }
 
     for(i = 0; i < points.length; i++){
@@ -179,7 +207,7 @@ function genSingleData(points, clicked){
 //Draw scatter points
 function drawScatter(points, xScale){
 
-    var xScale1 = xScale.range([10, width-10]);
+    var xScale1 = xScale.range([20, width - 20]);
     xAxis = d3.axisBottom(xScale1);
 
     axis.call(xAxis);
@@ -201,7 +229,7 @@ function createSimilarData(points){
         }
     }
     for(i = 0; i < points.length; i++){
-        points[i]["similarData"] = +(100 * (Math.abs(USAVal - points[i]["data"])/Math.abs(USAVal))).toFixed(3);
+        points[i]["similarData"] = +(100 * Math.abs(USAVal - points[i]["data"])).toFixed(3);
         if (points[i]["similarData"] == 0 && points[i]["name"] != "USA") {
             points[i]["similarData"] = 0.001;
         }
@@ -274,6 +302,42 @@ function drawInitialList(points) {
         .text("?")
         .attr("x", 235)
         .attr("y", 20)
+        .on("mouseover", function (d, i) {
+            infobar.transition()
+            .style("opacity", 0.8)
+            .duration(200)
+            infobar.append("rect")
+            .attr("x", 0)
+            .attr("y", 28)
+            .attr("width", 280)
+            .attr("height", 30)
+            .attr("rx", 10)
+            .attr("ry", 10)
+            .attr("fill", "white")
+            .style("font-size", 20)
+            infobar.append("text")
+            .text("Percent difference is calculated by adding the factors")
+            .attr("x", 10)
+            .attr("y", 40)
+            .attr("font-size", 11)
+            .attr("width", 280)
+            .attr("height", 60)
+            .attr("fill", "black")
+            infobar.append("text")
+            .text("you selected and comparing them to the average US.")
+            .attr("x", 10)
+            .attr("y", 50)
+            .attr("font-size", 11)
+            .attr("width", 200)
+            .attr("height", 60)
+            .attr("fill", "black")
+
+        })
+            .on("mouseout", function (d) {
+                infobar.transition()
+                .duration(500)
+                .style("opacity", 0);
+            });
 
     colors = ["#393851","#494867"];
     createSimilarData(points);
@@ -396,7 +460,7 @@ function drawInitialScatter(points,clicked, boxCount) {
         .domain(d3.extent(finalData))
         .range([20, width-20]);
 
-    var xScale1 = xScale.range([10, width-10]);
+    var xScale1 = xScale.range([20, width - 20]);
     xAxis = d3.axisBottom(xScale1);
 
     rScale = d3.scaleLinear()
